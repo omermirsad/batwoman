@@ -1,4 +1,6 @@
 import React, { useState, useRef, useEffect, useCallback } from 'react';
+import ReactMarkdown from 'react-markdown';
+import remarkGfm from 'remark-gfm';
 import { type Message } from '../types';
 import { createChatSession, sendMessage } from '../services/geminiService';
 import type { Chat } from '@google/genai';
@@ -86,7 +88,21 @@ const GeminiChat: React.FC = () => {
               <div key={index} className={`flex items-start gap-3 ${msg.role === 'user' ? 'justify-end' : ''}`}>
                 {msg.role === 'model' && <div className="flex-shrink-0 w-8 h-8 rounded-full bg-indigo-600 flex items-center justify-center"><BatIcon className="w-5 h-5 text-white"/></div>}
                 <div className={`max-w-md p-3 rounded-lg ${msg.role === 'user' ? 'bg-indigo-600 text-white' : 'bg-[#2a2a3e] text-gray-200'}`}>
-                   {isTyping ? <TypingIndicator /> : <p className="whitespace-pre-wrap">{msg.text}</p>}
+                   {isTyping ? <TypingIndicator /> : (
+                      msg.role === 'model' ? (
+                        <ReactMarkdown 
+                          className="markdown-content"
+                          remarkPlugins={[remarkGfm]}
+                          components={{
+                            a: ({node, ...props}) => <a {...props} target="_blank" rel="noopener noreferrer" />
+                          }}
+                        >
+                          {msg.text}
+                        </ReactMarkdown>
+                      ) : (
+                        <p className="whitespace-pre-wrap">{msg.text}</p>
+                      )
+                   )}
                 </div>
               </div>
             )
