@@ -1,14 +1,77 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" class="dark">
   <head>
-    <meta charset="UTF--8" />
+    <meta charset="UTF-8" />
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Dark Echology | Bat Research & Conservation</title>
+    
+    <!-- SEO and Metadata -->
+    <title>Dr. Echo | Bat Ecology, Conservation & Research | Chiropterologist</title>
+    <meta name="description" content="Explore the world of bat ecology and conservation with Dr. Echo, a PhD candidate specializing in chiropterology. Discover research on biodiversity, sound analysis, and ask our AI expert your questions about bats." />
+    <meta name="keywords" content="bat ecology, chiropterology, bat conservation, Dr. Echo, acoustic analysis, biodiversity, renewable energy, bat research, yarasalar, ekoloji, koruma, murciélagos, ecología, conservación, خفافيش, علم البيئة, الحفاظ على البيئة" />
+    <meta name="author" content="Dr. Echo" />
+
+    <!-- Open Graph / Facebook -->
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content="https://darkechology.com/" />
+    <meta property="og:title" content="Dr. Echo | Bat Ecology, Conservation & Research" />
+    <meta property="og:description" content="Advancing bat ecology research and conservation efforts for these vital creatures of the night." />
+    <meta property="og:image" content="https://lh3.googleusercontent.com/aida-public/AB6AXuC1R7W_zqgGGuKiACfxhaMSZPDce1t_cnCM0aDzsWOS_iwrmw9J28g8MhDhc8b9ZqO9yD2HdBMDoyjD22c9ElMKyULLOaUoy7rCe02XweR2w21VH2pIokk4HDmd3aeBn4RCajCfmEeUvX235Cxig-NjJqsaH5Tn6xfJ6mn9WLM4NlFiXWu7h_krjyCWbIMch-3WH8IFnZHBCqO_My_1Qg5SNe9QXgAKFprAe_swIEtHa1yrSVlz5YXyRwgIG4_Va1AgT-3nRhC8ISZO" />
+
+    <!-- Twitter -->
+    <meta property="twitter:card" content="summary_large_image" />
+    <meta property="twitter:url" content="https://darkechology.com/" />
+    <meta property="twitter:title" content="Dr. Echo | Bat Ecology, Conservation & Research" />
+    <meta property="twitter:description" content="Advancing bat ecology research and conservation efforts for these vital creatures of the night." />
+    <meta property="twitter:image" content="https://lh3.googleusercontent.com/aida-public/AB6AXuC1R7W_zqgGGuKiACfxhaMSZPDce1t_cnCM0aDzsWOS_iwrmw9J28g8MhDhc8b9ZqO9yD2HdBMDoyjD22c9ElMKyULLOaUoy7rCe02XweR2w21VH2pIokk4HDmd3aeBn4RCajCfmEeUvX235Cxig-NjJqsaH5Tn6xfJ6mn9WLM4NlFiXWu7h_krjyCWbIMch-3WH8IFnZHBCqO_My_1Qg5SNe9QXgAKFprAe_swIEtHa1yrSVlz5YXyRwgIG4_Va1AgT-3nRhC8ISZO" />
+    
+    <!-- Multi-language SEO -->
+    <link rel="alternate" hreflang="en" href="https://darkechology.com/" />
+    <link rel="alternate" hreflang="tr" href="https://darkechology.com/" />
+    <link rel="alternate" hreflang="es" href="https://darkechology.com/" />
+    <link rel="alternate" hreflang="ar" href="https://darkechology.com/" />
+    <link rel="alternate" hreflang="x-default" href="https://darkechology.com/" />
+
     <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined" rel="stylesheet" />
     <style>
       body {
-        background-color: #111827; /* bg-gray-900 */
+        background-color: #111121;
+        font-family: 'Space Grotesk', sans-serif;
+      }
+      /* Scroll-reveal animations */
+      .section-container {
+        opacity: 0;
+        transform: translateY(2rem);
+        transition: opacity 0.6s ease-out, transform 0.6s cubic-bezier(0.215, 0.610, 0.355, 1);
+      }
+      .section-container.is-visible {
+        opacity: 1;
+        transform: translateY(0);
+      }
+      /* Hero load-in animations */
+      @keyframes fadeInUp {
+        from {
+            opacity: 0;
+            transform: translate3d(0, 20px, 0);
+        }
+        to {
+            opacity: 1;
+            transform: translate3d(0, 0, 0);
+        }
+      }
+      .animate-fadeInUp {
+        opacity: 0;
+        animation: fadeInUp 0.8s ease-out forwards;
+      }
+      .animation-delay-200 {
+        animation-delay: 0.2s;
+      }
+      .animation-delay-400 {
+        animation-delay: 0.4s;
       }
     </style>
   <script type="importmap">

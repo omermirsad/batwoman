@@ -4,6 +4,7 @@ import { createChatSession, sendMessage } from '../services/geminiService';
 import type { Chat } from '@google/genai';
 import { SendIcon } from './icons/SendIcon';
 import { BatIcon } from './icons/BatIcon';
+import { TypingIndicator } from './TypingIndicator';
 
 const GeminiChat: React.FC = () => {
   const [chat, setChat] = useState<Chat | null>(null);
@@ -52,15 +53,17 @@ const GeminiChat: React.FC = () => {
 
     try {
         const stream = sendMessage(chat, input);
+        let accumulatedText = "";
         for await (const textChunk of stream) {
+            accumulatedText += textChunk;
             setMessages(prev => prev.map((msg, index) => 
-                index === prev.length - 1 ? { ...msg, text: msg.text + textChunk } : msg
+                index === prev.length - 1 ? { ...msg, text: accumulatedText } : msg
             ));
         }
     } catch (e: unknown) {
       const errorMessage = e instanceof Error ? e.message : 'An unknown error occurred.';
       setError(`Failed to get response: ${errorMessage}`);
-      setMessages(prev => prev.slice(0, -1)); // remove empty model message
+      setMessages(prev => prev.slice(0, -2)); // remove user and empty model message on error
     } finally {
       setIsLoading(false);
     }
@@ -73,23 +76,28 @@ const GeminiChat: React.FC = () => {
         <p className="mt-4 text-lg text-gray-400">Have a question about bats? My AI assistant is here to help.</p>
       </div>
 
-      <div className="bg-gray-800 rounded-lg shadow-xl h-[60vh] flex flex-col">
+      <div className="bg-[#1a1a2e] rounded-lg shadow-xl h-[60vh] flex flex-col">
         <div className="flex-1 p-6 overflow-y-auto space-y-4">
-          {messages.map((msg, index) => (
-            <div key={index} className={`flex items-start gap-3 ${msg.role === 'user' ? 'justify-end' : ''}`}>
-              {msg.role === 'model' && <div className="flex-shrink-0 w-8 h-8 rounded-full bg-indigo-600 flex items-center justify-center"><BatIcon className="w-5 h-5 text-white"/></div>}
-              <div className={`max-w-md p-3 rounded-lg ${msg.role === 'user' ? 'bg-indigo-600 text-white' : 'bg-gray-700 text-gray-200'}`}>
-                <p className="whitespace-pre-wrap">{msg.text || <span className="animate-pulse">...</span>}</p>
+          {messages.map((msg, index) => {
+             const isLastMessage = index === messages.length - 1;
+             const isTyping = isLastMessage && msg.role === 'model' && isLoading;
+
+            return (
+              <div key={index} className={`flex items-start gap-3 ${msg.role === 'user' ? 'justify-end' : ''}`}>
+                {msg.role === 'model' && <div className="flex-shrink-0 w-8 h-8 rounded-full bg-indigo-600 flex items-center justify-center"><BatIcon className="w-5 h-5 text-white"/></div>}
+                <div className={`max-w-md p-3 rounded-lg ${msg.role === 'user' ? 'bg-indigo-600 text-white' : 'bg-[#2a2a3e] text-gray-200'}`}>
+                   {isTyping ? <TypingIndicator /> : <p className="whitespace-pre-wrap">{msg.text}</p>}
+                </div>
               </div>
-            </div>
-          ))}
+            )
+          })}
           <div ref={messagesEndRef} />
         </div>
         
-        {error && <div className="p-4 text-red-400 bg-red-900/50">{error}</div>}
+        {error && <div className="p-4 text-red-400 bg-red-900/50 text-sm">{error}</div>}
 
-        <div className="p-4 border-t border-gray-700">
-          <div className="flex items-center bg-gray-900 rounded-lg">
+        <div className="p-4 border-t border-[#2a2a3e]">
+          <div className="flex items-center bg-[#111121] rounded-lg ring-1 ring-transparent focus-within:ring-indigo-500">
             <input
               type="text"
               value={input}
@@ -102,10 +110,11 @@ const GeminiChat: React.FC = () => {
             <button
               onClick={handleSend}
               disabled={isLoading || !input.trim()}
-              className="p-3 text-gray-400 rounded-r-lg hover:text-indigo-400 disabled:text-gray-600 disabled:cursor-not-allowed transition-colors"
+              className="p-3 text-gray-400 rounded-r-lg hover:text-indigo-500 disabled:text-gray-600 disabled:cursor-not-allowed transition-colors"
+              aria-label="Send message"
             >
               {isLoading ? (
-                <div className="w-6 h-6 border-2 border-t-indigo-400 border-gray-600 rounded-full animate-spin"></div>
+                <div className="w-6 h-6 border-2 border-t-indigo-500 border-gray-600 rounded-full animate-spin"></div>
               ) : (
                 <SendIcon className="w-6 h-6" />
               )}

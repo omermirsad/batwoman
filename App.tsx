@@ -4,23 +4,36 @@ import Hero from './components/Hero';
 import About from './components/About';
 import Services from './components/Services';
 import GeminiChat from './components/GeminiChat';
+import Contact from './components/Contact';
 import Footer from './components/Footer';
+import AnimatedSection from './components/AnimatedSection';
 
 const App: React.FC = () => {
   return (
-    <div className="min-h-screen bg-gray-900 font-sans text-gray-300 antialiased">
+    <div className="bg-[#111121] text-gray-300 antialiased">
       <Header />
       <main>
         <Hero />
-        <section id="about" className="py-20 sm:py-32">
-            <About />
-        </section>
-        <section id="services" className="py-20 sm:py-32 bg-gray-800">
-            <Services />
-        </section>
-        <section id="ai-chat" className="py-20 sm:py-32">
-            <GeminiChat />
-        </section>
+        <AnimatedSection>
+          <section id="about" className="py-20 sm:py-32 bg-[#111121]">
+              <About />
+          </section>
+        </AnimatedSection>
+        <AnimatedSection>
+          <section id="services" className="py-20 sm:py-32 bg-[#1a1a2e]">
+              <Services />
+          </section>
+        </AnimatedSection>
+        <AnimatedSection>
+          <section id="ai-chat" className="py-20 sm:py-32 bg-[#111121]">
+              <GeminiChat />
+          </section>
+        </AnimatedSection>
+        <AnimatedSection>
+          <section id="contact" className="py-20 sm:py-32 bg-[#1a1a2e]">
+            <Contact />
+          </section>
+        </AnimatedSection>
       </main>
       <Footer />
     </div>
