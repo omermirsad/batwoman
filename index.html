@@ -52,7 +52,7 @@
         opacity: 1;
         transform: translateY(0);
       }
-      /* Hero load-in animations */
+      /* Load-in animations */
       @keyframes fadeInUp {
         from {
             opacity: 0;
@@ -63,9 +63,23 @@
             transform: translate3d(0, 0, 0);
         }
       }
+      @keyframes fadeIn {
+        from { opacity: 0; }
+        to { opacity: 1; }
+      }
+      @keyframes scaleIn {
+        from { transform: scale(0.95); opacity: 0; }
+        to { transform: scale(1); opacity: 1; }
+      }
       .animate-fadeInUp {
         opacity: 0;
         animation: fadeInUp 0.8s ease-out forwards;
+      }
+      .animate-fadeIn {
+        animation: fadeIn 0.3s ease-out forwards;
+      }
+      .animate-scaleIn {
+        animation: scaleIn 0.3s ease-out forwards;
       }
       .animation-delay-200 {
         animation-delay: 0.2s;
