@@ -8,19 +8,28 @@ const About: React.FC = () => {
   ];
 
   const educationItems = [
-    { school: 'University of California, Berkeley', degree: 'PhD Candidate, Ecology' },
-    { school: 'University of Michigan', degree: 'MSc in Environmental Science' },
-    { school: 'American University of Beirut', degree: 'BSc in Biology' },
+    { school: 'Boğaziçi University', degree: 'PhD, Environmental Science (2021 - 2025)' },
+    { school: 'Université de Bordeaux', degree: 'Master of Science, Ecology and Evolutionary Biology (2017 - 2019)' },
+    { school: 'Lebanese University - Faculty of Sciences', degree: 'Bachelor of Science, Biology (2014 - 2017)' },
   ];
 
   return (
-    <div className="container mx-auto max-w-4xl px-4 sm:px-6 lg:px-8">
-      <h2 className="text-4xl font-bold tracking-tight text-white mb-8 text-center sm:text-left">About Me</h2>
-      <div className="space-y-10">
-        <section>
-          <p className="text-lg leading-relaxed text-gray-300">
-            I am a PhD candidate specializing in bat ecology and conservation, with a focus on biodiversity conservation, renewable energy, and climate change. My research investigates the complex interactions between bats and wind farms, aiming to develop effective mitigation strategies. I have extensive professional experience with KAB Ecology, where I've contributed to numerous projects assessing and mitigating the impacts of wind energy on bat populations.
-          </p>
+    <div className="container mx-auto max-w-5xl px-4 sm:px-6 lg:px-8">
+      <h2 className="text-4xl font-bold tracking-tight text-white mb-12 text-center">About Dark Echology</h2>
+      <div className="space-y-16">
+        <section className="grid grid-cols-1 md:grid-cols-3 gap-8 md:gap-12 items-center">
+          <div className="md:col-span-1 flex justify-center">
+            <img 
+              src="https://kabecology.com/wp-content/uploads/2022/09/20220429_110541_ed.jpg"
+              alt="Maha Salameh, founder of Dark Echology"
+              className="rounded-xl shadow-lg w-full max-w-xs md:max-w-none ring-2 ring-offset-4 ring-offset-[#111121] ring-indigo-600/50"
+            />
+          </div>
+          <div className="md:col-span-2">
+            <p className="text-lg leading-relaxed text-gray-300">
+              I am Maha Salameh, a PhD researcher in Molecular Ecology and Evolution at Boğaziçi University, Istanbul, focusing on biodiversity conservation, renewable energy, and climate change mitigation. At KAB Ecology, I help advise on bat–wind farm interactions by analyzing acoustic data with BatExplorer and Kaleidoscope Pro and conducting molecular DNA analyses from field samples. My goal is to reduce bat mortality while supporting the transition to clean wind energy. I hold a Master’s degree in Terrestrial Ecology and Evolution from the University of Bordeaux, where my research examined the global distribution of termite mound landscapes and the reproductive strategies of Cryphonectria parasitica, the fungus responsible for chestnut blight. I earned my Bachelor’s in Biology from the Lebanese University in 2017.
+            </p>
+          </div>
         </section>
 
         <div className="grid grid-cols-1 md:grid-cols-2 gap-x-12 gap-y-10">
@@ -57,10 +66,10 @@ const About: React.FC = () => {
         </div>
 
         <section>
-          <h3 className="text-2xl font-bold text-white mb-4">Personal Motivation</h3>
+          <h3 className="text-2xl font-bold text-white mb-4">My Motivation</h3>
           <div className="border-l-4 border-indigo-600 pl-4">
             <p className="italic text-lg leading-relaxed text-gray-400">
-              "Growing up in Lebanon, I developed a deep appreciation for the natural world and a strong desire to protect its biodiversity. This passion led me to pursue a career in bat ecology and conservation, where I can contribute to the preservation of these fascinating creatures and their vital role in our ecosystems."
+              "Growing up in Lebanon, developed a deep appreciation for the natural world and a strong desire to protect its biodiversity. This passion led to the creation of Dark Echology, a platform to contribute to the preservation of these fascinating creatures and their vital role in our ecosystems."
             </p>
           </div>
         </section>

@@ -25,7 +25,7 @@ const Hero: React.FC = () => {
             Protecting Our Ecosystems, One Bat at a Time
           </h1>
           <p className="mt-6 max-w-2xl mx-auto text-lg text-gray-300 animate-fadeInUp animation-delay-200">
-            Dr. Echo is dedicated to advancing bat ecology research and conservation efforts. Explore our work and discover how we're making a difference for these vital creatures of the night.
+            Dark Echology is dedicated to advancing bat ecology research and conservation efforts. Explore our work and discover how we're making a difference for these vital creatures of the night.
           </p>
           <div className="mt-10 flex flex-col sm:flex-row items-center justify-center gap-4 animate-fadeInUp animation-delay-400">
             <a href="#about" className="inline-flex items-center justify-center rounded-lg bg-indigo-600 px-8 py-3 text-base font-bold text-white shadow-lg transition-transform hover:scale-105 hover:shadow-indigo-500/50">

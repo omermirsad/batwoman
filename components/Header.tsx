@@ -4,7 +4,8 @@ import { EchoIcon } from './icons/EchoIcon';
 const navLinks = [
   { name: 'About', href: '#about' },
   { name: 'Services', href: '#services' },
-  { name: 'Ask Dr. Echo', href: '#ai-chat' },
+  { name: 'Blog', href: '#blog' },
+  { name: 'Ask the AI Expert', href: '#ai-chat' },
 ];
 
 const MobileMenu: React.FC<{onClose: () => void}> = ({onClose}) => {
@@ -49,7 +50,7 @@ const Header: React.FC = () => {
           <div className="flex items-center justify-between h-20">
             <a href="#" className="flex items-center gap-3 text-white">
               <EchoIcon className="h-8 w-8 text-indigo-500" />
-              <span className="text-xl font-bold tracking-tight">Dr. Echo</span>
+              <span className="text-xl font-bold tracking-tight">Dark Echology</span>
             </a>
             <nav className="hidden md:flex items-center gap-8">
               {navLinks.map((link) => (

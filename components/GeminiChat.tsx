@@ -23,7 +23,7 @@ const GeminiChat: React.FC = () => {
       setMessages([
         {
           role: 'model',
-          text: "Hello! I am Dr. Echo, an AI assistant knowledgeable in bat ecology and conservation. How can I help you today?",
+          text: "Hello! I am the AI assistant for Dark Echology, knowledgeable in bat ecology and conservation. How can I help you today?",
         },
       ]);
     } catch (e: unknown) {
@@ -74,8 +74,8 @@ const GeminiChat: React.FC = () => {
   return (
     <div className="container mx-auto max-w-3xl px-4 sm:px-6 lg:px-8">
       <div className="text-center mb-12">
-        <h2 className="text-3xl sm:text-4xl font-bold text-white">Ask Dr. Echo</h2>
-        <p className="mt-4 text-lg text-gray-400">Have a question about bats? My AI assistant is here to help.</p>
+        <h2 className="text-3xl sm:text-4xl font-bold text-white">Ask the AI Expert</h2>
+        <p className="mt-4 text-lg text-gray-400">Have a question about bats? Our AI assistant is here to help.</p>
       </div>
 
       <div className="bg-[#1a1a2e] rounded-lg shadow-xl h-[60vh] flex flex-col">
