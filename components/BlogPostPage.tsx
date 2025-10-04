@@ -20,7 +20,7 @@ const BlogPostPage: React.FC<BlogPostPageProps> = ({ post }) => {
           </a>
         </div>
         <article>
-          <img src={post.imageSrc} alt={post.title} className="w-full h-56 sm:h-64 object-cover rounded-lg mb-8 shadow-lg" />
+          <img src={post.imageSrc} alt={post.imageAlt} className="w-full h-56 sm:h-64 object-cover rounded-lg mb-8 shadow-lg" />
           <p className="text-sm font-medium text-indigo-400 mb-2">{post.category}</p>
           <h1 className="text-3xl sm:text-4xl font-bold text-white mb-6">{post.title}</h1>
           <div className="markdown-content text-gray-300 leading-relaxed">

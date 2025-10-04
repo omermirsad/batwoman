@@ -23,7 +23,7 @@ const BlogPostModal: React.FC<BlogPostModalProps> = ({ post, onClose }) => {
         onClick={(e) => e.stopPropagation()}
       >
         <div className="flex-shrink-0 relative">
-          <img src={post.imageSrc} alt={post.title} className="w-full h-56 object-cover rounded-t-lg" />
+          <img src={post.imageSrc} alt={post.imageAlt} className="w-full h-56 object-cover rounded-t-lg" />
           <button
             onClick={onClose}
             className="absolute top-4 right-4 text-white bg-black/50 rounded-full p-1.5 hover:bg-black/80 transition-colors focus:outline-none focus:ring-2 focus:ring-white"

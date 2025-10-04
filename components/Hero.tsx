@@ -13,9 +13,10 @@ const Hero: React.FC = () => {
           muted
           playsInline
           className="h-full w-full object-cover"
-          src="https://www.pexels.com/download/video/7181665/"
-          poster="https://images.pexels.com/videos/2864313/free-video-2864313.jpg?auto=compress&cs=tinysrgb&dpr=1&w=500"
-        />
+          poster="/images/hero-poster.jpg"
+        >
+          <source src="https://www.pexels.com/download/video/7181665/" 
+        </video>
         <div className="absolute inset-0 bg-black/60"></div>
         <div className="absolute inset-0 bg-gradient-to-t from-[#111121] via-[#111121]/70 to-transparent"></div>
       </div>

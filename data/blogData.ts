@@ -1,6 +1,7 @@
 export interface BlogPost {
   slug: string;
   imageSrc: string;
+  imageAlt: string;
   category: string;
   title: string;
   excerpt: string;
@@ -21,6 +22,7 @@ export const blogPosts: BlogPost[] = [
   {
     slug: generateSlug('The Critical Role of Bats in Pest Control'),
     imageSrc: 'https://images.pexels.com/photos/38008/pexels-photo-38008.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1',
+    imageAlt: 'A small brown bat flying at dusk with its mouth open, about to catch an insect.',
     category: 'Conservation',
     title: 'The Critical Role of Bats in Pest Control',
     excerpt: 'Did you know a single bat can eat thousands of insects in one night? Discover how bats are a farmer\'s best friend and vital for our ecosystems.',
@@ -49,6 +51,7 @@ By supporting bat conservation, we are supporting the health of our planet and t
   {
     slug: generateSlug('Impact of Wind Turbines on Bat Populations'),
     imageSrc: 'https://i.ibb.co/Gb5bsH5/wind-turbine-bat.png',
+    imageAlt: 'A composite image showing a silhouette of a bat flying near a large wind turbine at sunset.',
     category: 'Research',
     title: 'Impact of Wind Turbines on Bat Populations',
     excerpt: 'Exploring the challenges and solutions for mitigating the impact of renewable energy infrastructure on local bat populations.',
@@ -77,6 +80,7 @@ Ongoing research at Dark Echology and other institutions is focused on making th
   {
     slug: generateSlug('Debunking Common Bat Myths'),
     imageSrc: 'https://images.pexels.com/photos/207999/pexels-photo-207999.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1',
+    imageAlt: 'A brown bat hanging upside down from a tree branch, wings tucked in, against a blurred green background.',
     category: 'Education',
     title: 'Debunking Common Bat Myths',
     excerpt: 'Vampires, rabies, and blindness. Let\'s separate fact from fiction and uncover the truth about these fascinating and misunderstood creatures.',

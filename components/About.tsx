@@ -21,7 +21,7 @@ const About: React.FC = () => {
           <div className="md:col-span-1 flex justify-center">
             <img 
               src="https://kabecology.com/wp-content/uploads/2022/09/20220429_110541_ed.jpg"
-              alt="Maha Salameh, founder of Dark Echology"
+              alt="A smiling woman with dark hair, Maha Salameh, standing outdoors."
               className="rounded-xl shadow-lg w-full max-w-xs md:max-w-none ring-2 ring-offset-4 ring-offset-[#111121] ring-indigo-600/50"
             />
           </div>

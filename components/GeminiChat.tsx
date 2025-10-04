@@ -2,14 +2,12 @@ import React, { useState, useRef, useEffect, useCallback } from 'react';
 import ReactMarkdown from 'react-markdown';
 import remarkGfm from 'remark-gfm';
 import { type Message } from '../types';
-import { createChatSession, sendMessage } from '../services/geminiService';
-import type { Chat } from '@google/genai';
+import { streamChatResponse } from '../services/geminiService';
 import { SendIcon } from './icons/SendIcon';
 import { BatIcon } from './icons/BatIcon';
 import { TypingIndicator } from './TypingIndicator';
 
 const GeminiChat: React.FC = () => {
-  const [chat, setChat] = useState<Chat | null>(null);
   const [messages, setMessages] = useState<Message[]>([]);
   const [input, setInput] = useState('');
   const [isLoading, setIsLoading] = useState(false);
@@ -17,22 +15,13 @@ const GeminiChat: React.FC = () => {
   const messagesEndRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
-    try {
-      const chatSession = createChatSession();
-      setChat(chatSession);
-      setMessages([
-        {
-          role: 'model',
-          text: "Hello! I am the AI assistant for Dark Echology, knowledgeable in bat ecology and conservation. How can I help you today?",
-        },
-      ]);
-    } catch (e: unknown) {
-        if (e instanceof Error) {
-            setError(`Failed to initialize AI chat: ${e.message}`);
-        } else {
-            setError('An unknown error occurred during initialization.');
-        }
-    }
+    // Initialize with a greeting message.
+    setMessages([
+      {
+        role: 'model',
+        text: "Hello! I am the AI assistant for Dark Echology, knowledgeable in bat ecology and conservation. How can I help you today?",
+      },
+    ]);
   }, []);
 
   const scrollToBottom = () => {
@@ -42,34 +31,38 @@ const GeminiChat: React.FC = () => {
   useEffect(scrollToBottom, [messages]);
 
   const handleSend = useCallback(async () => {
-    if (!input.trim() || !chat || isLoading) return;
+    if (!input.trim() || isLoading) return;
 
     const userMessage: Message = { role: 'user', text: input };
-    setMessages((prev) => [...prev, userMessage]);
+    const newMessages = [...messages, userMessage];
+    
+    setMessages(newMessages);
     setInput('');
     setIsLoading(true);
     setError(null);
 
-    const modelMessage: Message = { role: 'model', text: '' };
-    setMessages((prev) => [...prev, modelMessage]);
+    // Add a placeholder for the model's response
+    setMessages(prev => [...prev, { role: 'model', text: '' }]);
 
     try {
-        const stream = sendMessage(chat, input);
-        let accumulatedText = "";
-        for await (const textChunk of stream) {
-            accumulatedText += textChunk;
-            setMessages(prev => prev.map((msg, index) => 
-                index === prev.length - 1 ? { ...msg, text: accumulatedText } : msg
-            ));
-        }
+      // Pass the entire chat history to the new service function
+      const stream = streamChatResponse(newMessages);
+      let accumulatedText = "";
+      for await (const textChunk of stream) {
+        accumulatedText += textChunk;
+        setMessages(prev => prev.map((msg, index) =>
+          index === prev.length - 1 ? { ...msg, text: accumulatedText } : msg
+        ));
+      }
     } catch (e: unknown) {
       const errorMessage = e instanceof Error ? e.message : 'An unknown error occurred.';
       setError(`Failed to get response: ${errorMessage}`);
-      setMessages(prev => prev.slice(0, -2)); // remove user and empty model message on error
+      // On error, remove the empty model message placeholder
+      setMessages(prev => prev.slice(0, -1));
     } finally {
       setIsLoading(false);
     }
-  }, [input, chat, isLoading]);
+  }, [input, isLoading, messages]);
 
   return (
     <div className="container mx-auto max-w-3xl px-4 sm:px-6 lg:px-8">
@@ -90,15 +83,17 @@ const GeminiChat: React.FC = () => {
                 <div className={`max-w-md p-3 rounded-lg ${msg.role === 'user' ? 'bg-indigo-600 text-white' : 'bg-[#2a2a3e] text-gray-200'}`}>
                    {isTyping ? <TypingIndicator /> : (
                       msg.role === 'model' ? (
-                        <ReactMarkdown 
-                          className="markdown-content"
-                          remarkPlugins={[remarkGfm]}
-                          components={{
-                            a: ({node, ...props}) => <a {...props} target="_blank" rel="noopener noreferrer" />
-                          }}
-                        >
-                          {msg.text}
-                        </ReactMarkdown>
+                        // Fix: The `className` prop is not supported on `ReactMarkdown`. Wrap it in a div to apply styles.
+                        <div className="markdown-content">
+                          <ReactMarkdown 
+                            remarkPlugins={[remarkGfm]}
+                            components={{
+                              a: ({node, ...props}) => <a {...props} target="_blank" rel="noopener noreferrer" />
+                            }}
+                          >
+                            {msg.text}
+                          </ReactMarkdown>
+                        </div>
                       ) : (
                         <p className="whitespace-pre-wrap">{msg.text}</p>
                       )

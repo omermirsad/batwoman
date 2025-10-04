@@ -17,7 +17,7 @@ const Blog: React.FC = () => {
             href={`/#/blog/${post.slug}`}
             className="bg-[#1a1a2e] rounded-lg overflow-hidden shadow-lg hover:shadow-indigo-500/20 transition-all duration-300 hover:-translate-y-1 flex flex-col group"
           >
-            <img src={post.imageSrc} alt={post.title} className="w-full h-48 object-cover" />
+            <img src={post.imageSrc} alt={post.imageAlt} className="w-full h-48 object-cover" />
             <div className="p-6 flex flex-col flex-grow">
               <p className="text-sm font-medium text-indigo-400 mb-1">{post.category}</p>
               <h3 className="text-xl font-bold text-white mb-2 group-hover:text-indigo-400 transition-colors duration-300">
