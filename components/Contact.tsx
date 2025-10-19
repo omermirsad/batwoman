@@ -34,7 +34,7 @@ const Contact: React.FC = () => {
         </p>
         <div className="mt-6 inline-flex items-center gap-2 bg-[#1a1a2e] border border-indigo-600/30 rounded-lg px-4 py-2">
           <svg className="text-gray-400" fill="currentColor" height="20" viewBox="0 0 256 256" width="20" xmlns="http://www.w3.org/2000/svg"><path d="M224,48H32a8,8,0,0,0-8,8V192a8,8,0,0,0,8,8H224a8,8,0,0,0,8-8V56A8,8,0,0,0,224,48Zm-8,135.54L152.12,128,216,72.46ZM32,184V64H40V184Zm8.46-111.54L104,128,40.46,72.46ZM109.88,132.46,128,148.1l18.12-15.64L208,184H48Z"></path></svg>
-          <a className="font-medium text-gray-200 hover:text-indigo-500 transition-colors" href="mailto:contact@darkechology.com">contact@darkechology.com</a>
+          <a className="font-medium text-gray-200 hover:text-indigo-500 transition-colors" href="mailto:darkechology@gmail.com">darkechology@gmail.com</a>
         </div>
       </div>
       <form onSubmit={handleSubmit} className="mt-12 space-y-6 bg-[#1a1a2e] p-8 rounded-xl border border-indigo-600/30">
