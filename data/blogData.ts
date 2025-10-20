@@ -18,13 +18,12 @@ const generateSlug = (title: string): string => {
     .replace(/-+/g, '-');
 };
 
-export const blogPosts: BlogPost[] = [
+const blogPostsData: Omit<BlogPost, 'slug'>[] = [
   {
-    slug: generateSlug('The Critical Role of Bats in Pest Control'),
     imageSrc: 'https://images.pexels.com/photos/38008/pexels-photo-38008.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1',
     imageAlt: 'A small brown bat flying at dusk with its mouth open, about to catch an insect.',
     category: 'Conservation',
-    title: 'The Critical Role of Bats in Pest Control',
+    title: 'The Critical Role of Bats in Agricultural Pest Control',
     excerpt: 'Did you know a single bat can eat thousands of insects in one night? Discover how bats are a farmer\'s best friend and vital for our ecosystems.',
     fullContent: `
 A single bat can consume up to 1,200 mosquito-sized insects every hour. Across the United States alone, the value of bats' pest-control services is estimated to be worth more than **$3.7 billion a year**.
@@ -40,20 +39,29 @@ This natural form of pest control offers several key benefits:
 
 ### How You Can Help
 
-Protecting bat habitats is not just about saving a species; it's about preserving a natural, effective, and free pest control service that supports our food supply. Simple actions can make a huge difference:
+Protecting bat habitats is not just about saving a species; it's about preserving a natural, effective, and free pest control service that supports our food supply. Simple actions can make a huge difference, forming a key part of modern [bat conservation strategies](#/blog/wind-turbines-and-bat-conservation-mitigating-the-impact).
 - Install a bat house in your backyard to provide a safe roost.
 - Avoid using harmful pesticides that can poison bats and their insect prey.
 - Educate others about the incredible benefits bats provide.
 
 By supporting bat conservation, we are supporting the health of our planet and the resilience of our food systems.
+
+---
+
+### Frequently Asked Questions
+
+**How many insects do bats really eat?**
+A single little brown bat can eat over 1,000 mosquito-sized insects in a single hour. A colony of bats can consume many tons of insects each night, making them incredibly effective for pest control.
+
+**Why are bats important for the environment?**
+Beyond pest control, bats are vital pollinators for over 500 plant species, including fruits like bananas and mangoes. They are also excellent seed dispersers, helping to regenerate forests. Their role is critical for biodiversity.
     `,
   },
   {
-    slug: generateSlug('Impact of Wind Turbines on Bat Populations'),
     imageSrc: 'https://i.ibb.co/Gb5bsH5/wind-turbine-bat.png',
     imageAlt: 'A composite image showing a silhouette of a bat flying near a large wind turbine at sunset.',
     category: 'Research',
-    title: 'Impact of Wind Turbines on Bat Populations',
+    title: 'Wind Turbines & Bat Conservation: Mitigating the Impact',
     excerpt: 'Exploring the challenges and solutions for mitigating the impact of renewable energy infrastructure on local bat populations.',
     fullContent: `
 Wind energy is a cornerstone of our transition to a cleaner future, but it presents a significant challenge for wildlife, particularly bats. The push for renewable energy must be balanced with robust conservation strategies to protect vulnerable species.
@@ -68,21 +76,30 @@ Migratory, tree-roosting species like the Hoary Bat and the Eastern Red Bat are 
 
 ### Innovative Mitigation Strategies
 
-The goal is not to choose between clean energy and wildlife conservation, but to innovate and find solutions that allow them to coexist. Researchers and engineers are actively developing and refining several mitigation strategies:
+The goal is not to choose between clean energy and wildlife conservation, but to innovate and find solutions that allow them to coexist. Our [ecological consulting services](#/services) focus on developing and implementing these strategies. Researchers and engineers are actively refining several approaches:
 
 - **Operational Curtailment:** This involves stopping or slowing turbine blades during periods of low wind speed when bats are most active (typically at night during late summer and fall). Studies have shown this can reduce bat fatalities by over 50% with minimal loss of energy production.
 - **Acoustic Deterrents:** These devices are mounted on the turbines and emit high-frequency sounds that are disruptive to bats' echolocation. This creates an "uncomfortable" zone that encourages bats to stay away from the dangerous rotor-swept area.
 - **Strategic Siting:** Careful planning and assessment before construction can ensure wind farms are built away from major bat migration corridors, critical foraging habitats, and large roosting sites.
 
 Ongoing research at Dark Echology and other institutions is focused on making these solutions more effective and cost-efficient, paving the way for a future where green energy and thriving ecosystems go hand in hand.
+
+---
+
+### Frequently Asked Questions
+
+**How exactly do wind turbines harm bats?**
+Bats are harmed either by direct collision with the fast-moving blades or by a phenomenon called barotrauma, where the sudden drop in air pressure near the blades causes their lungs to collapse.
+
+**What is being done to protect bats from wind turbines?**
+Key strategies include "curtailment" (slowing blades at high-risk times), installing ultrasonic acoustic deterrents to repel bats, and smarter site selection for new wind farms to avoid critical bat habitats and migration routes.
     `,
   },
   {
-    slug: generateSlug('Debunking Common Bat Myths'),
     imageSrc: 'https://images.pexels.com/photos/207999/pexels-photo-207999.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1',
     imageAlt: 'A brown bat hanging upside down from a tree branch, wings tucked in, against a blurred green background.',
     category: 'Education',
-    title: 'Debunking Common Bat Myths',
+    title: 'Bat Myths vs. Facts: Debunking Common Misconceptions',
     excerpt: 'Vampires, rabies, and blindness. Let\'s separate fact from fiction and uncover the truth about these fascinating and misunderstood creatures.',
     fullContent: `
 Bats are among the most misunderstood animals on the planet, shrouded in folklore and misinformation. It's time to shine a light on the truth and replace fear with fascination.
@@ -99,7 +116,22 @@ Bats are among the most misunderstood animals on the planet, shrouded in folklor
 ### Myth 4: All bats have rabies.
 **Fact:** Like all mammals, bats can contract rabies, but the incidence is extremely low. Scientific studies show that less than half of one percent of the bat population is rabid. A bat with rabies typically becomes sick and dies quickly, and they rarely become aggressive. That being said, you should never handle any wild animal. If you see a bat on the ground or in need of help, contact a local wildlife professional.
 
-By learning the facts, we can appreciate bats for what they truly are: ecologically vital, incredibly diverse, and fascinating creatures of the night.
+By learning the facts, we can appreciate bats for what they truly are: [ecologically vital](#/blog/the-critical-role-of-bats-in-agricultural-pest-control), incredibly diverse, and fascinating creatures of the night.
+
+---
+
+### Frequently Asked Questions
+
+**Are bats really blind?**
+No, bats are not blind. All bats can see. Many species that hunt at night also use a sophisticated sonar system called echolocation to navigate and find prey in complete darkness.
+
+**Do bats attack humans?**
+Bats do not attack humans. They are shy, gentle creatures that will try to avoid people. A bat that seems to be flying towards you is likely just chasing insects that are attracted to you. A bat should only be handled by a trained professional.
     `,
   },
 ];
+
+export const blogPosts: BlogPost[] = blogPostsData.map(post => ({
+  ...post,
+  slug: generateSlug(post.title),
+}));

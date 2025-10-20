@@ -21,13 +21,13 @@ const About: React.FC = () => {
           <div className="md:col-span-1 flex justify-center">
             <img 
               src="https://kabecology.com/wp-content/uploads/2022/09/20220429_110541_ed.jpg"
-              alt="A smiling woman with dark hair, Maha Salameh, standing outdoors."
+              alt="Maha Salameh, a chiropterologist and bat ecology researcher."
               className="rounded-xl shadow-lg w-full max-w-xs md:max-w-none ring-2 ring-offset-4 ring-offset-[#111121] ring-indigo-600/50"
             />
           </div>
           <div className="md:col-span-2">
             <p className="text-lg leading-relaxed text-gray-300">
-              I am Maha Salameh, a PhD researcher in Molecular Ecology and Evolution at Boğaziçi University, Istanbul, focusing on biodiversity conservation, renewable energy, and climate change mitigation. At KAB Ecology, I help advise on bat–wind farm interactions by analyzing acoustic data with BatExplorer and Kaleidoscope Pro and conducting molecular DNA analyses from field samples. My goal is to reduce bat mortality while supporting the transition to clean wind energy. I hold a Master’s degree in Terrestrial Ecology and Evolution from the University of Bordeaux, where my research examined the global distribution of termite mound landscapes and the reproductive strategies of Cryphonectria parasitica, the fungus responsible for chestnut blight. I earned my Bachelor’s in Biology from the Lebanese University in 2017.
+              I am Maha Salameh, a chiropterologist and PhD researcher in Molecular Ecology and Evolution at Boğaziçi University, Istanbul. My work in bat ecology focuses on biodiversity conservation, renewable energy impacts, and climate change mitigation. At KAB Ecology, I help advise on bat–wind farm interactions by analyzing acoustic data with BatExplorer and Kaleidoscope Pro and conducting molecular DNA analyses from field samples. My goal is to reduce bat mortality while supporting the transition to clean wind energy. I hold a Master’s degree in Terrestrial Ecology and Evolution from the University of Bordeaux, where my research examined the global distribution of termite mound landscapes and the reproductive strategies of Cryphonectria parasitica, the fungus responsible for chestnut blight. I earned my Bachelor’s in Biology from the Lebanese University in 2017.
             </p>
           </div>
         </section>

@@ -8,8 +8,36 @@ interface BlogPostPageProps {
 }
 
 const BlogPostPage: React.FC<BlogPostPageProps> = ({ post }) => {
+  
+  const ArticleSchema = () => {
+    const schema = {
+      '@context': 'https://schema.org',
+      '@type': 'Article',
+      'mainEntityOfPage': {
+        '@type': 'WebPage',
+        '@id': `https://darkechology.com/#/blog/${post.slug}`,
+      },
+      'headline': post.title,
+      'image': post.imageSrc,
+      'description': post.excerpt,
+      'author': {
+        '@type': 'Person',
+        'name': 'Maha Salameh',
+        'url': 'https://darkechology.com/#about'
+      },
+      'publisher': {
+        '@type': 'Organization',
+        'name': 'Dark Echology',
+      },
+    };
+    return (
+      <script type="application/ld+json">{JSON.stringify(schema)}</script>
+    );
+  };
+  
   return (
     <main className="pt-24 sm:pt-32 pb-16 animate-fadeIn">
+      <ArticleSchema />
       <div className="container mx-auto max-w-3xl px-4 sm:px-6 lg:px-8">
         <div className="mb-8">
           <a href="#blog" className="inline-flex items-center text-indigo-400 hover:text-indigo-300 transition-colors font-semibold">

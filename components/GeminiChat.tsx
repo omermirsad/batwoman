@@ -69,6 +69,7 @@ const GeminiChat: React.FC = () => {
       <div className="text-center mb-12">
         <h2 className="text-3xl sm:text-4xl font-bold text-white">Ask the AI Expert</h2>
         <p className="mt-4 text-lg text-gray-400">Have a question about bats? Our AI assistant is here to help.</p>
+        <p className="mt-2 text-sm text-gray-500">Your questions help us identify new topics for our blog!</p>
       </div>
 
       <div className="bg-[#1a1a2e] rounded-lg shadow-xl h-[60vh] flex flex-col">

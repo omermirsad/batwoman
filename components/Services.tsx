@@ -9,7 +9,7 @@ const services = [
     title: 'Bat Sound Analysis',
     description: (
       <>
-        Expert analysis of echolocation and social calls using advanced software like <strong className="font-semibold text-gray-200">BatExplorer</strong> and <strong className="font-semibold text-gray-200">Kaleidoscope Pro</strong>. We identify species, assess activity, and monitor population changes, delivering detailed reports with actionable insights.
+        Expert analysis of echolocation and social calls using advanced software like <strong className="font-semibold text-gray-200">BatExplorer</strong> and <strong className="font-semibold text-gray-200">Kaleidoscope Pro</strong>. We identify species, assess activity, and monitor population changes, delivering detailed reports with actionable insights for research and conservation projects.
       </>
     ),
   },
@@ -21,7 +21,7 @@ const services = [
   {
     icon: <ConsultIcon className="w-10 h-10" />,
     title: 'Ecological Consulting',
-    description: 'Ecological consulting to support conservation planning and mitigation strategies for bats. Our expertise includes habitat and impact assessments, and the development of conservation management plans for developers, land managers, and conservation organizations.',
+    description: 'Expert ecological consulting to support conservation planning and develop effective mitigation strategies for bats. Our expertise includes habitat and impact assessments, and the development of conservation management plans for developers, land managers, and conservation organizations.',
   },
 ];
 
