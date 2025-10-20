@@ -7,28 +7,38 @@ import { SendIcon } from './icons/SendIcon';
 import { BatIcon } from './icons/BatIcon';
 import { TypingIndicator } from './TypingIndicator';
 
+const systemInstruction = `You are an AI assistant for Dark Echology, a professional website run by chiropterologist Maha Salameh. Your expertise is in bat ecology, conservation, sound analysis, and the ecological balance of the night.
+- Your tone should be expert, scientific, yet accessible and engaging for a general audience.
+- When answering questions, be factual and rely on established scientific knowledge about bats.
+- You can reference the work of Dark Echology and Maha Salameh where relevant.
+- You should encourage users to explore the website's sections (About, Services, Blog).
+- Do not make up information. If you don't know an answer, say so.
+- Format your answers using Markdown for readability (e.g., lists, bold text, italics).`;
+
 const GeminiChat: React.FC = () => {
-  const [messages, setMessages] = useState<Message[]>([]);
+  const [messages, setMessages] = useState<Message[]>([
+    {
+      role: 'model',
+      text: "Hello! I am the AI assistant for Dark Echology, knowledgeable in bat ecology and conservation. How can I help you today?",
+    },
+  ]);
   const [input, setInput] = useState('');
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
   const messagesEndRef = useRef<HTMLDivElement>(null);
-
-  useEffect(() => {
-    // Initialize with a greeting message.
-    setMessages([
-      {
-        role: 'model',
-        text: "Hello! I am the AI assistant for Dark Echology, knowledgeable in bat ecology and conservation. How can I help you today?",
-      },
-    ]);
-  }, []);
+  const prevMessagesLength = useRef(messages.length);
 
   const scrollToBottom = () => {
     messagesEndRef.current?.scrollIntoView({ behavior: 'smooth' });
   };
 
-  useEffect(scrollToBottom, [messages]);
+  useEffect(() => {
+    // Only scroll to bottom if a new message has been added, to prevent scrolling on initial load.
+    if (messages.length > prevMessagesLength.current) {
+      scrollToBottom();
+    }
+    prevMessagesLength.current = messages.length;
+  }, [messages]);
 
   const handleSend = useCallback(async () => {
     if (!input.trim() || isLoading) return;
@@ -45,14 +55,18 @@ const GeminiChat: React.FC = () => {
     setMessages(prev => [...prev, { role: 'model', text: '' }]);
 
     try {
-      // Pass the entire chat history to the new service function
-      const stream = streamChatResponse(newMessages);
+      // Pass the entire chat history and system instruction to the service function
+      const stream = streamChatResponse(newMessages, systemInstruction);
       for await (const textChunk of stream) {
-        // The stream from geminiService yields the full aggregated text,
-        // so we replace the content of the last message directly.
-        setMessages(prev => prev.map((msg, index) =>
-          index === prev.length - 1 ? { ...msg, text: textChunk } : msg
-        ));
+        // Append the incoming text chunk to the last message
+        setMessages(prev => {
+            const lastMessage = prev[prev.length - 1];
+            const updatedLastMessage = {
+                ...lastMessage,
+                text: lastMessage.text + textChunk,
+            };
+            return [...prev.slice(0, -1), updatedLastMessage];
+        });
       }
     } catch (e: unknown) {
       const errorMessage = e instanceof Error ? e.message : 'An unknown error occurred.';
@@ -76,7 +90,7 @@ const GeminiChat: React.FC = () => {
         <div className="flex-1 p-6 overflow-y-auto space-y-4">
           {messages.map((msg, index) => {
              const isLastMessage = index === messages.length - 1;
-             const isTyping = isLastMessage && msg.role === 'model' && isLoading;
+             const isTyping = isLastMessage && msg.role === 'model' && isLoading && msg.text === '';
 
             return (
               <div key={index} className={`flex items-start gap-3 ${msg.role === 'user' ? 'justify-end' : ''}`}>
@@ -84,7 +98,6 @@ const GeminiChat: React.FC = () => {
                 <div className={`max-w-md p-3 rounded-lg ${msg.role === 'user' ? 'bg-indigo-600 text-white' : 'bg-[#2a2a3e] text-gray-200'}`}>
                    {isTyping ? <TypingIndicator /> : (
                       msg.role === 'model' ? (
-                        // Fix: The `className` prop is not supported on `ReactMarkdown`. Wrap it in a div to apply styles.
                         <div className="markdown-content">
                           <ReactMarkdown 
                             remarkPlugins={[remarkGfm]}

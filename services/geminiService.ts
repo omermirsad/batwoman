@@ -8,11 +8,12 @@ const ai = new GoogleGenAI({ apiKey: process.env.API_KEY });
 /**
  * Streams a chat response from the Gemini API using the client-side SDK.
  * @param messages The full chat history for context.
- * @returns An async generator that yields the aggregated response text chunks.
+ * @param systemInstruction A system-level instruction for the model.
+ * @returns An async generator that yields the response text chunks.
  */
-export async function* streamChatResponse(messages: Message[]) {
-  // Use gemini-2.5-flash, the current and recommended model for this task.
-  const modelName = 'gemini-2.0-flash';
+export async function* streamChatResponse(messages: Message[], systemInstruction: string) {
+  // Use gemini-2.5-flash, a current and recommended model for this task.
+  const modelName = 'gemini-2.5-flash';
 
   if (messages.length === 0) {
     return;
@@ -31,13 +32,15 @@ export async function* streamChatResponse(messages: Message[]) {
   const chat = ai.chats.create({
     model: modelName,
     history: history,
+    config: {
+      systemInstruction: systemInstruction,
+    },
   });
 
   const responseStream = await chat.sendMessageStream({ message: userPrompt });
 
   for await (const chunk of responseStream) {
-    // The `text` property on the chunk provides the full, aggregated text
-    // from the stream up to that point.
+    // Each chunk from the stream contains a delta of the text.
     yield chunk.text;
   }
 }
