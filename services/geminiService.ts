@@ -1,37 +1,43 @@
+import { GoogleGenAI } from "@google/genai";
 import { type Message } from '../types';
 
+// Initialize the Google GenAI client directly on the frontend.
+// The API key is expected to be available via process.env.API_KEY.
+const ai = new GoogleGenAI({ apiKey: process.env.API_KEY });
+
 /**
- * Sends the chat history to a server-side proxy and streams the response.
- * @param messages The full chat history.
- * @returns An async generator that yields response text chunks.
+ * Streams a chat response from the Gemini API using the client-side SDK.
+ * @param messages The full chat history for context.
+ * @returns An async generator that yields the aggregated response text chunks.
  */
 export async function* streamChatResponse(messages: Message[]) {
-  // This function now calls a relative endpoint, assuming a backend proxy
-  // is set up to handle the request and securely call the Gemini API.
-  const response = await fetch('/api/gemini-chat', {
-    method: 'POST',
-    headers: {
-      'Content-Type': 'application/json',
-    },
-    // Send the entire message history for context.
-    body: JSON.stringify({ history: messages }),
-  });
+  // Use gemini-2.5-flash, the current and recommended model for this task.
+  const modelName = 'gemini-2.0-flash';
 
-  if (!response.ok || !response.body) {
-    const errorText = await response.text();
-    throw new Error(`Server error: ${response.status} ${errorText || response.statusText}`);
+  if (messages.length === 0) {
+    return;
   }
 
-  const reader = response.body.getReader();
-  const decoder = new TextDecoder();
+  // The last message is the user's prompt.
+  const userPrompt = messages[messages.length - 1].text;
 
-  // Read and decode the streamed response
-  while (true) {
-    const { done, value } = await reader.read();
-    if (done) {
-      break;
-    }
-    const chunk = decoder.decode(value, { stream: true });
-    yield chunk;
+  // The history is all messages before the last one.
+  // Map our Message type to the format expected by the GoogleGenAI SDK.
+  const history = messages.slice(0, -1).map(msg => ({
+    role: msg.role,
+    parts: [{ text: msg.text }],
+  }));
+
+  const chat = ai.chats.create({
+    model: modelName,
+    history: history,
+  });
+
+  const responseStream = await chat.sendMessageStream({ message: userPrompt });
+
+  for await (const chunk of responseStream) {
+    // The `text` property on the chunk provides the full, aggregated text
+    // from the stream up to that point.
+    yield chunk.text;
   }
 }

@@ -47,11 +47,11 @@ const GeminiChat: React.FC = () => {
     try {
       // Pass the entire chat history to the new service function
       const stream = streamChatResponse(newMessages);
-      let accumulatedText = "";
       for await (const textChunk of stream) {
-        accumulatedText += textChunk;
+        // The stream from geminiService yields the full aggregated text,
+        // so we replace the content of the last message directly.
         setMessages(prev => prev.map((msg, index) =>
-          index === prev.length - 1 ? { ...msg, text: accumulatedText } : msg
+          index === prev.length - 1 ? { ...msg, text: textChunk } : msg
         ));
       }
     } catch (e: unknown) {
