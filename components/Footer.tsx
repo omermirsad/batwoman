@@ -1,6 +1,7 @@
 import React from 'react';
 import { LinkedInIcon } from './icons/LinkedInIcon';
 import { InstagramIcon } from './icons/InstagramIcon';
+import { GitHubIcon } from './icons/GitHubIcon';
 
 const Footer: React.FC = () => {
   return (
@@ -24,6 +25,15 @@ const Footer: React.FC = () => {
             className="text-gray-400 hover:text-indigo-400 transition-colors"
           >
             <InstagramIcon className="w-6 h-6" />
+          </a>
+          <a
+            href="https://github.com/darkechology"
+            target="_blank"
+            rel="noopener noreferrer"
+            aria-label="GitHub Profile"
+            className="text-gray-400 hover:text-indigo-400 transition-colors"
+          >
+            <GitHubIcon className="w-6 h-6" />
           </a>
         </div>
         <p className="text-sm">&copy; {new Date().getFullYear()} Dark Echology | Bat Ecology & Conservation. All Rights Reserved.</p>
