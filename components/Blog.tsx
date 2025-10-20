@@ -43,7 +43,7 @@ const Blog: React.FC = () => {
           {filteredPosts.map((post) => (
             <a
               key={post.title}
-              href={`/#/blog/${post.slug}`}
+              href={`#/blog/${post.slug}`}
               className="bg-[#1a1a2e] rounded-lg overflow-hidden shadow-lg hover:shadow-indigo-500/20 transition-all duration-300 hover:-translate-y-1 flex flex-col group"
             >
               <img src={post.imageSrc} alt={post.imageAlt} className="w-full h-48 object-cover" />
