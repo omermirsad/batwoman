@@ -61,6 +61,7 @@ const GeminiChat: React.FC = () => {
         // Append the incoming text chunk to the last message
         setMessages(prev => {
             const lastMessage = prev[prev.length - 1];
+            if (!lastMessage) return prev; // Guard against undefined
             const updatedLastMessage = {
                 ...lastMessage,
                 text: lastMessage.text + textChunk,

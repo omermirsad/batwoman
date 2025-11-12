@@ -32,7 +32,8 @@ export async function* streamChatResponse(messages: Message[], systemInstruction
   }
 
   // The last message is the user's prompt.
-  const userPrompt = messages[messages.length - 1].text;
+  const lastMessage = messages[messages.length - 1];
+  const userPrompt = lastMessage?.text;
 
   if (!userPrompt || userPrompt.trim().length === 0) {
     throw new Error('Message cannot be empty.');
