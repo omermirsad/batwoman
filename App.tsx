@@ -32,16 +32,27 @@ const App: React.FC = () => {
     };
   }, []);
   
+  useEffect(() => {
+    // Handle invalid blog post routes
+    if (route.startsWith('#/blog/')) {
+      const slug = route.substring('#/blog/'.length);
+      const post = blogPosts.find(p => p.slug === slug);
+
+      if (!post) {
+        // If post is not found, redirect to the homepage's blog section
+        window.location.hash = '#blog';
+      }
+    }
+  }, [route]);
+
   const renderContent = () => {
     if (route.startsWith('#/blog/')) {
       const slug = route.substring('#/blog/'.length);
       const post = blogPosts.find(p => p.slug === slug);
-      
+
       if (post) {
         return <BlogPostPage post={post} />;
       }
-      // If post is not found, redirect to the homepage's blog section
-      window.location.hash = '#blog';
       return null;
     }
 

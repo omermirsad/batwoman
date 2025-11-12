@@ -1,14 +1,16 @@
 import { useState, useEffect, RefObject } from 'react';
 
+// Check if IntersectionObserver is available (once, outside component)
+const hasIntersectionObserver = typeof window !== 'undefined' && 'IntersectionObserver' in window;
+
 export function useOnScreen(ref: RefObject<HTMLElement>): boolean {
-  const [isIntersecting, setIntersecting] = useState(false);
+  // Initialize state based on IntersectionObserver availability
+  const [isIntersecting, setIntersecting] = useState(!hasIntersectionObserver);
 
   useEffect(() => {
-    // Ensure IntersectionObserver is available
-    if (typeof window === 'undefined' || !('IntersectionObserver' in window)) {
-        // Fallback for older browsers or server-side rendering
-        setIntersecting(true);
-        return;
+    // If IntersectionObserver is not available, element is already visible
+    if (!hasIntersectionObserver) {
+      return;
     }
 
     const observer = new IntersectionObserver(

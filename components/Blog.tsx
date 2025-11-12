@@ -1,18 +1,16 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useMemo } from 'react';
 import { blogPosts } from '../data/blogData';
 import { SearchIcon } from './icons/SearchIcon';
 
 const Blog: React.FC = () => {
   const [searchTerm, setSearchTerm] = useState('');
-  const [filteredPosts, setFilteredPosts] = useState(blogPosts);
 
-  useEffect(() => {
-    const results = blogPosts.filter(post =>
+  const filteredPosts = useMemo(() => {
+    return blogPosts.filter(post =>
       post.title.toLowerCase().includes(searchTerm.toLowerCase()) ||
       post.category.toLowerCase().includes(searchTerm.toLowerCase()) ||
       post.excerpt.toLowerCase().includes(searchTerm.toLowerCase())
     );
-    setFilteredPosts(results);
   }, [searchTerm]);
 
   return (
