@@ -15,7 +15,8 @@ const Contact: React.FC = () => {
 
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    console.log('Form submitted:', formData);
+    // Note: This form currently displays a message locally.
+    // For production, integrate with a backend service or email API (e.g., EmailJS, Formspree).
     alert('Thank you for your message! I will get back to you soon.');
     setFormData({
       name: '',

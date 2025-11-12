@@ -15,7 +15,7 @@ const Hero: React.FC = () => {
           className="h-full w-full object-cover"
           poster="/images/hero-poster.jpg"
         >
-          <source src="https://www.pexels.com/download/video/7181665/" 
+          <source src="https://www.pexels.com/download/video/7181665/" type="video/mp4" />
         </video>
         <div className="absolute inset-0 bg-black/60"></div>
         <div className="absolute inset-0 bg-gradient-to-t from-[#111121] via-[#111121]/70 to-transparent"></div>
