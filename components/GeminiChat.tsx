@@ -58,10 +58,8 @@ const GeminiChat: React.FC = () => {
     logger.userAction('Chat Message Sent', { messageLength: input.length });
 
     try {
-      // Use production service if available, otherwise fallback to dev
-      const stream = useProductionService
-        ? streamChatResponse(newMessages)
-        : streamChatResponseDev(newMessages, systemInstruction);
+      // Use production service
+      const stream = streamChatResponse(newMessages, systemInstruction);
 
       for await (const textChunk of stream) {
         // Append the incoming text chunk to the last message

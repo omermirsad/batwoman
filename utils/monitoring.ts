@@ -139,7 +139,7 @@ export function trackPerformance(
   startTime: number,
   metadata?: Record<string, unknown>
 ): void {
-  const duration = performance.now() - startTime;
+  const duration = globalThis.performance.now() - startTime;
   logger.performance(name, duration, metadata);
 
   // Send to Sentry if enabled
@@ -165,7 +165,7 @@ export function startPerformanceTracking(
   name: string,
   metadata?: Record<string, unknown>
 ): () => void {
-  const startTime = performance.now();
+  const startTime = globalThis.performance.now();
 
   return () => {
     trackPerformance(name, startTime, metadata);
@@ -182,7 +182,7 @@ export function trackPageLoad(): void {
 
   // Wait for page to fully load
   window.addEventListener('load', () => {
-    setTimeout(() => {
+    globalThis.setTimeout(() => {
       const perfData = window.performance.timing;
       const pageLoadTime = perfData.loadEventEnd - perfData.navigationStart;
       const connectTime = perfData.responseEnd - perfData.requestStart;

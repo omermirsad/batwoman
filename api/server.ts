@@ -14,6 +14,7 @@ dotenv.config();
 
 const app = express();
 const PORT = process.env.PORT || 3001;
+  // eslint-disable-next-line no-console
 const NODE_ENV = process.env.NODE_ENV || 'development';
 
 // Validate required environment variables
@@ -58,6 +59,7 @@ app.use((req: Request, res: Response, next: NextFunction) => {
   const start = Date.now();
   res.on('finish', () => {
     const duration = Date.now() - start;
+    // eslint-disable-next-line no-console
     console.log(
       `[${new Date().toISOString()}] ${req.method} ${req.path} - ${res.statusCode} (${duration}ms)`
     );
@@ -246,8 +248,10 @@ app.post('/api/contact', async (req: Request, res: Response): Promise<void> => {
       });
     }
 
+    // eslint-disable-next-line no-console
     // TODO: Implement actual email sending logic here
     // For now, just log and return success
+    // eslint-disable-next-line no-console
     console.log('Contact form submission:', { name, email, subject, message });
 
     res.status(200).json({
@@ -280,14 +284,23 @@ app.use((err: Error, _req: Request, res: Response, _next: NextFunction) => {
 });
 
 // Start server
+  // eslint-disable-next-line no-console
+  // eslint-disable-next-line no-console
+  // eslint-disable-next-line no-console
+  // eslint-disable-next-line no-console
+  // eslint-disable-next-line no-console
+  // eslint-disable-next-line no-console
 app.listen(PORT, () => {
   console.log(`✅ API Server running on port ${PORT}`);
   console.log(`   Environment: ${NODE_ENV}`);
   console.log(`   Allowed Origins: ${allowedOrigins.join(', ')}`);
+  // eslint-disable-next-line no-console
 });
 
 // Graceful shutdown
 process.on('SIGTERM', () => {
+  // eslint-disable-next-line no-console
+  // eslint-disable-next-line no-console
   console.log('SIGTERM received, shutting down gracefully');
   process.exit(0);
 });
