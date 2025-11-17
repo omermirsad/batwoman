@@ -8,14 +8,6 @@ import { logger } from '../utils/logger';
 import { BatIcon } from './icons/BatIcon';
 import { TypingIndicator } from './TypingIndicator';
 
-const systemInstruction = `You are an AI assistant for Dark Echology, a professional website run by chiropterologist Maha Salameh. Your expertise is in bat ecology, conservation, sound analysis, and the ecological balance of the night.
-- Your tone should be expert, scientific, yet accessible and engaging for a general audience.
-- When answering questions, be factual and rely on established scientific knowledge about bats.
-- You can reference the work of Dark Echology and Maha Salameh where relevant.
-- You should encourage users to explore the website's sections (About, Services, Blog).
-- Do not make up information. If you don't know an answer, say so.
-- Format your answers using Markdown for readability (e.g., lists, bold text, italics).`;
-
 const GeminiChat: React.FC = () => {
   const [messages, setMessages] = useState<Message[]>([
     {
@@ -58,8 +50,8 @@ const GeminiChat: React.FC = () => {
     logger.userAction('Chat Message Sent', { messageLength: input.length });
 
     try {
-      // Use production service
-      const stream = streamChatResponse(newMessages, systemInstruction);
+      // Use production service (systemInstruction is hardcoded in production service)
+      const stream = streamChatResponse(newMessages);
 
       for await (const textChunk of stream) {
         // Append the incoming text chunk to the last message

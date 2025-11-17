@@ -58,7 +58,7 @@ function sleep(ms: number): Promise<void> {
  * Create API client with interceptors and retry logic
  */
 export function createApiClient(baseURL?: string, retryConfig?: Partial<RetryConfig>): AxiosInstance {
-  const config = { ...DEFAULT_RETRY_CONFIG, ...retryConfig };
+  const retryConf = { ...DEFAULT_RETRY_CONFIG, ...retryConfig };
 
   const client = axios.create({
     baseURL: baseURL || import.meta.env.VITE_API_URL || 'http://localhost:3001',
@@ -134,13 +134,13 @@ export function createApiClient(baseURL?: string, retryConfig?: Partial<RetryCon
       config._retryCount = config._retryCount || 0;
 
       // Check if we should retry
-      if (config._retryCount < config.maxRetries && isRetryableError(error)) {
+      if (config._retryCount < retryConf.maxRetries && isRetryableError(error)) {
         config._retryCount += 1;
 
-        const delay = calculateBackoff(config._retryCount - 1, config);
+        const delay = calculateBackoff(config._retryCount - 1, retryConf);
 
         logger.warn(
-          `Retrying request (attempt ${config._retryCount}/${config.maxRetries})`,
+          `Retrying request (attempt ${config._retryCount}/${retryConf.maxRetries})`,
           {
             url: config.url,
             method: config.method,
