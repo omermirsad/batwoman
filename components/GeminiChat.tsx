@@ -1,6 +1,7 @@
 import React, { useState, useRef, useEffect, useCallback } from 'react';
 import ReactMarkdown from 'react-markdown';
 import remarkGfm from 'remark-gfm';
+import { type Message } from '../types';
 import { streamChatResponse } from '../services/geminiService.production';
 import { SendIcon } from './icons/SendIcon';
 import { logger } from '../utils/logger';
