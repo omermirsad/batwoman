@@ -34,7 +34,13 @@ Object.defineProperty(window, 'matchMedia', {
 });
 
 // Mock IntersectionObserver
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
 globalThis.IntersectionObserver = class IntersectionObserver {
+  // eslint-disable-next-line no-undef
+  readonly root: Element | null = null;
+  readonly rootMargin: string = '';
+  readonly thresholds: ReadonlyArray<number> = [];
+
   constructor() {}
   disconnect() {}
   observe() {}
@@ -42,7 +48,7 @@ globalThis.IntersectionObserver = class IntersectionObserver {
   takeRecords() {
     return [];
   }
-};
+} as any;
 
 // Mock ResizeObserver
 globalThis.ResizeObserver = class ResizeObserver {
