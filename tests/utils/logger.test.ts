@@ -41,40 +41,35 @@ describe('Logger', () => {
     const context = { userId: '123', action: 'test' };
     logger.info('Test with context', context);
     expect(consoleInfoSpy).toHaveBeenCalledWith(
-      expect.stringContaining('Test with context'),
-      expect.anything()
+      expect.stringContaining('Test with context')
     );
   });
 
   it('logs API requests', () => {
     logger.apiRequest('GET', '/api/test');
     expect(consoleInfoSpy).toHaveBeenCalledWith(
-      expect.stringContaining('API Request: GET /api/test'),
-      expect.anything()
+      expect.stringContaining('API Request: GET /api/test')
     );
   });
 
   it('logs API responses', () => {
     logger.apiResponse('GET', '/api/test', 200, 150);
     expect(consoleInfoSpy).toHaveBeenCalledWith(
-      expect.stringContaining('API Response: GET /api/test - 200 (150ms)'),
-      expect.anything()
+      expect.stringContaining('API Response: GET /api/test - 200 (150ms)')
     );
   });
 
   it('logs user actions', () => {
     logger.userAction('Button Click', { buttonId: 'submit' });
     expect(consoleInfoSpy).toHaveBeenCalledWith(
-      expect.stringContaining('User Action: Button Click'),
-      expect.anything()
+      expect.stringContaining('User Action: Button Click')
     );
   });
 
   it('logs performance metrics', () => {
     logger.performance('Page Load', 1250);
     expect(consoleInfoSpy).toHaveBeenCalledWith(
-      expect.stringContaining('Performance: Page Load = 1250ms'),
-      expect.anything()
+      expect.stringContaining('Performance: Page Load = 1250ms')
     );
   });
 });
