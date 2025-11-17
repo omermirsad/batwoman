@@ -63,7 +63,7 @@ RATE_LIMIT_WINDOW_MS=900000
 RATE_LIMIT_MAX_REQUESTS=100
 ```
 
-#### Frontend (Vercel/Netlify/hosting platform)
+#### Frontend (Netlify/Vercel/hosting platform)
 ```bash
 VITE_API_URL=https://your-api-domain.com
 VITE_SENTRY_DSN=https://xxx@yyy.ingest.sentry.io/zzz
@@ -78,57 +78,43 @@ VITE_APP_VERSION=1.0.0
 
 ## Deployment Options
 
-### Vercel (Recommended)
+### Netlify (Recommended)
 
 #### Prerequisites
-- Vercel account
-- GitHub repository connected to Vercel
+- Netlify account
+- GitHub repository connected to Netlify
 - Backend API deployed separately (see Custom Server section)
 
-#### Steps
+#### Option 1: Deploy via GitHub (Recommended)
 
-1. **Install Vercel CLI** (optional, for manual deployment)
-```bash
-npm install -g vercel
-```
+1. **Connect Repository to Netlify**
+   - Go to [Netlify Dashboard](https://app.netlify.com/)
+   - Click "Add new site" → "Import an existing project"
+   - Connect your GitHub repository
 
-2. **Deploy via GitHub (Recommended)**
-   - Connect your repository to Vercel
-   - Configure environment variables in Vercel dashboard:
-     - Settings → Environment Variables
-     - Add all `VITE_*` variables
-   - Vercel will auto-deploy on push to main branch
+2. **Configure Build Settings**
+   - Build command: `npm run build`
+   - Publish directory: `dist`
+   - Node version: `20`
 
-3. **Manual Deployment**
-```bash
-# Build the project
-npm run build
+3. **Configure Environment Variables**
+   - Go to Site settings → Environment variables
+   - Add all `VITE_*` variables:
+     - `VITE_API_URL`
+     - `VITE_SENTRY_DSN`
+     - `VITE_EMAILJS_SERVICE_ID`
+     - `VITE_EMAILJS_TEMPLATE_ID`
+     - `VITE_EMAILJS_PUBLIC_KEY`
 
-# Deploy to Vercel
-vercel --prod
+4. **Configure Redirects & Headers**
+   - Netlify will automatically use the `netlify.toml` configuration file
+   - This handles SPA routing and security headers
 
-# When prompted, provide your environment variables
-```
+5. **Enable Automatic Deployments**
+   - Netlify will auto-deploy on push to main branch
+   - Preview deployments created for pull requests
 
-4. **Configure Custom Domain** (optional)
-   - Go to Vercel dashboard → Domains
-   - Add your custom domain
-   - Update DNS records as instructed
-
-#### Backend API Deployment on Vercel
-```bash
-# Create a serverless function for the API
-# Place api/server.ts in /api directory
-# Vercel will automatically deploy it as serverless functions
-```
-
-Alternative: Deploy backend separately (see Custom Server section)
-
----
-
-### Netlify
-
-#### Steps
+#### Option 2: Manual Deployment via CLI
 
 1. **Install Netlify CLI**
 ```bash
@@ -142,29 +128,69 @@ npm run build
 
 3. **Deploy**
 ```bash
-netlify deploy --prod
+# Login to Netlify
+netlify login
+
+# Deploy to production
+netlify deploy --prod --dir=dist
+
+# When prompted, follow the setup wizard
 ```
 
-4. **Configure Environment Variables**
-   - Netlify dashboard → Site settings → Environment variables
+4. **Configure Custom Domain** (optional)
+   - Go to Netlify dashboard → Domain management
+   - Add your custom domain
+   - Update DNS records as instructed
+   - SSL certificate will be automatically provisioned
+
+#### GitHub Actions Integration
+
+The CI/CD pipeline (`.github/workflows/ci.yml`) is already configured for Netlify:
+- Automatic deployments on merge to main
+- Preview deployments for pull requests
+- Required secrets:
+  - `NETLIFY_AUTH_TOKEN`: Get from Netlify dashboard → User settings → Applications
+  - `NETLIFY_SITE_ID`: Get from Site settings → General → Site details
+
+---
+
+### Vercel
+
+#### Option 1: Deploy via GitHub
+
+1. **Connect Repository to Vercel**
+   - Go to [Vercel Dashboard](https://vercel.com/dashboard)
+   - Click "Add New Project" → "Import Git Repository"
+   - Connect your GitHub repository
+
+2. **Configure Build Settings**
+   - Framework Preset: Vite
+   - Build Command: `npm run build`
+   - Output Directory: `dist`
+
+3. **Configure Environment Variables**
+   - Add all `VITE_*` variables in project settings
+   - Vercel will auto-deploy on push to main branch
+
+#### Option 2: Manual Deployment via CLI
+
+1. **Install Vercel CLI**
+```bash
+npm install -g vercel
+```
+
+2. **Deploy**
+```bash
+# Login to Vercel
+vercel login
+
+# Deploy to production
+vercel --prod
+```
+
+3. **Configure Environment Variables**
+   - Set via Vercel dashboard or CLI
    - Add all `VITE_*` variables
-
-5. **Configure Redirect Rules**
-Create `netlify.toml` in project root:
-```toml
-[[redirects]]
-  from = "/*"
-  to = "/index.html"
-  status = 200
-
-[[headers]]
-  for = "/*"
-    [headers.values]
-    X-Frame-Options = "DENY"
-    X-Content-Type-Options = "nosniff"
-    Referrer-Policy = "strict-origin-when-cross-origin"
-    Permissions-Policy = "camera=(), microphone=(), geolocation=()"
-```
 
 ---
 

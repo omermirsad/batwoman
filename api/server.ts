@@ -93,22 +93,24 @@ app.get('/health', (_req: Request, res: Response) => {
 });
 
 // Gemini chat streaming endpoint
-app.post('/api/chat/stream', async (req: Request, res: Response): Promise<void> => {
+app.post('/api/chat/stream', async (req: Request, res: Response) => {
   try {
     const { messages, systemInstruction } = req.body;
 
     // Validation
     if (!messages || !Array.isArray(messages) || messages.length === 0) {
-      return res.status(400).json({
+      res.status(400).json({
         error: 'Invalid request: messages array is required',
       });
+      return;
     }
 
     const lastMessage = messages[messages.length - 1];
     if (!lastMessage?.text || lastMessage.text.trim().length === 0) {
-      return res.status(400).json({
+      res.status(400).json({
         error: 'Invalid request: message cannot be empty',
       });
+      return;
     }
 
     // Set headers for SSE (Server-Sent Events)
@@ -160,22 +162,24 @@ app.post('/api/chat/stream', async (req: Request, res: Response): Promise<void> 
 });
 
 // Gemini chat non-streaming endpoint (fallback)
-app.post('/api/chat', async (req: Request, res: Response): Promise<void> => {
+app.post('/api/chat', async (req: Request, res: Response) => {
   try {
     const { messages, systemInstruction } = req.body;
 
     // Validation
     if (!messages || !Array.isArray(messages) || messages.length === 0) {
-      return res.status(400).json({
+      res.status(400).json({
         error: 'Invalid request: messages array is required',
       });
+      return;
     }
 
     const lastMessage = messages[messages.length - 1];
     if (!lastMessage?.text || lastMessage.text.trim().length === 0) {
-      return res.status(400).json({
+      res.status(400).json({
         error: 'Invalid request: message cannot be empty',
       });
+      return;
     }
 
     const modelName = 'gemini-2.5-flash';
@@ -208,17 +212,20 @@ app.post('/api/chat', async (req: Request, res: Response): Promise<void> => {
 
     // Provide helpful error messages
     if (errorMessage.includes('API_KEY')) {
-      return res.status(401).json({
+      res.status(401).json({
         error: 'Invalid API key configuration',
       });
+      return;
     } else if (errorMessage.includes('quota') || errorMessage.includes('limit')) {
-      return res.status(429).json({
+      res.status(429).json({
         error: 'API quota exceeded. Please try again later.',
       });
+      return;
     } else if (errorMessage.includes('network') || errorMessage.includes('fetch')) {
-      return res.status(503).json({
+      res.status(503).json({
         error: 'Network error. Please try again.',
       });
+      return;
     }
 
     res.status(500).json({
@@ -229,23 +236,25 @@ app.post('/api/chat', async (req: Request, res: Response): Promise<void> => {
 });
 
 // Contact form submission endpoint (optional - for future backend integration)
-app.post('/api/contact', async (req: Request, res: Response): Promise<void> => {
+app.post('/api/contact', async (req: Request, res: Response) => {
   try {
     const { name, email, subject, message } = req.body;
 
     // Validation
     if (!name || !email || !subject || !message) {
-      return res.status(400).json({
+      res.status(400).json({
         error: 'All fields are required',
       });
+      return;
     }
 
     // Email validation regex
     const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
     if (!emailRegex.test(email)) {
-      return res.status(400).json({
+      res.status(400).json({
         error: 'Invalid email address',
       });
+      return;
     }
 
     // eslint-disable-next-line no-console
