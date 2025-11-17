@@ -1,9 +1,9 @@
 import React, { useState, useRef, useEffect, useCallback } from 'react';
 import ReactMarkdown from 'react-markdown';
 import remarkGfm from 'remark-gfm';
-import { type Message } from '../types';
-import { streamChatResponse } from '../services/geminiService';
+import { streamChatResponse } from '../services/geminiService.production';
 import { SendIcon } from './icons/SendIcon';
+import { logger } from '../utils/logger';
 import { BatIcon } from './icons/BatIcon';
 import { TypingIndicator } from './TypingIndicator';
 
@@ -45,7 +45,7 @@ const GeminiChat: React.FC = () => {
 
     const userMessage: Message = { role: 'user', text: input };
     const newMessages = [...messages, userMessage];
-    
+
     setMessages(newMessages);
     setInput('');
     setIsLoading(true);
@@ -54,9 +54,14 @@ const GeminiChat: React.FC = () => {
     // Add a placeholder for the model's response
     setMessages(prev => [...prev, { role: 'model', text: '' }]);
 
+    logger.userAction('Chat Message Sent', { messageLength: input.length });
+
     try {
-      // Pass the entire chat history and system instruction to the service function
-      const stream = streamChatResponse(newMessages, systemInstruction);
+      // Use production service if available, otherwise fallback to dev
+      const stream = useProductionService
+        ? streamChatResponse(newMessages)
+        : streamChatResponseDev(newMessages, systemInstruction);
+
       for await (const textChunk of stream) {
         // Append the incoming text chunk to the last message
         setMessages(prev => {
@@ -69,8 +74,11 @@ const GeminiChat: React.FC = () => {
             return [...prev.slice(0, -1), updatedLastMessage];
         });
       }
+
+      logger.info('Chat response received successfully');
     } catch (e: unknown) {
       const errorMessage = e instanceof Error ? e.message : 'An unknown error occurred.';
+      logger.error('Chat error', e instanceof Error ? e : undefined);
       setError(`Failed to get response: ${errorMessage}`);
       // On error, remove the empty model message placeholder
       setMessages(prev => prev.slice(0, -1));

@@ -2,218 +2,446 @@
 <img width="1200" height="475" alt="GHBanner" src="https://github.com/user-attachments/assets/0aa67016-6eaf-458a-adb2-6e31a0763ed6" />
 </div>
 
-# Dark Echology - Professional Chiropterology Portfolio
+# Dark Echology - Production-Ready Chiropterology Platform
 
-A modern, production-ready web application showcasing bat ecology research, conservation services, and educational content. Built with React, TypeScript, Vite, and powered by Google's Gemini AI for interactive chat functionality.
+[![CI/CD](https://github.com/yourusername/batwoman/actions/workflows/ci.yml/badge.svg)](https://github.com/yourusername/batwoman/actions)
+[![TypeScript](https://img.shields.io/badge/TypeScript-5.8.2-blue)](https://www.typescriptlang.org/)
+[![React](https://img.shields.io/badge/React-19.1.1-61dafb)](https://react.dev/)
+[![License](https://img.shields.io/badge/License-MIT-green.svg)](LICENSE)
 
-View your app in AI Studio: https://ai.studio/apps/drive/1sVj6x48mGWaJclFrruU7OEBecpC09SPc
+A modern, **enterprise-grade** web application showcasing bat ecology research, conservation services, and educational content. Built with React, TypeScript, and Vite, featuring AI-powered chat, comprehensive testing, monitoring, and production-ready infrastructure.
 
-## Features
+[View Demo](https://your-demo-url.com) · [Report Bug](https://github.com/yourusername/batwoman/issues) · [Request Feature](https://github.com/yourusername/batwoman/issues)
 
-- 🦇 **Interactive AI Chat** - Ask questions about bat ecology powered by Google Gemini AI
-- 📝 **Blog System** - Educational articles with search functionality and individual post pages
-- 🎨 **Modern UI** - Responsive design with Tailwind CSS and smooth animations
-- 🔍 **SEO Optimized** - Rich metadata and Schema.org structured data
-- ⚡ **Fast Performance** - Built with Vite, optimized bundles, and code splitting
-- 🔒 **Type Safe** - Full TypeScript with strict mode enabled
-- ✨ **Code Quality** - ESLint configured with React and TypeScript best practices
+---
 
-## Tech Stack
+## ✨ Features
 
-- **Frontend Framework:** React 19.1.1
-- **Language:** TypeScript 5.8.2
-- **Build Tool:** Vite 6.2.0
-- **Styling:** Tailwind CSS (via CDN)
-- **AI Integration:** Google Gemini AI (@google/genai)
-- **Markdown:** react-markdown with GitHub-flavored markdown support
-- **Code Quality:** ESLint with TypeScript and React plugins
+### Core Functionality
+- 🦇 **AI-Powered Chat** - Interactive Q&A about bat ecology using Google Gemini AI
+- 📝 **Blog System** - Educational articles with search, filtering, and SEO optimization
+- 📧 **Contact Form** - Integrated with EmailJS for direct communication
+- 🎨 **Modern UI/UX** - Responsive design with smooth animations and accessibility
+- 🌙 **Dark Theme** - Eye-friendly dark color scheme optimized for readability
 
-## Prerequisites
+### Production-Ready Infrastructure
+- 🔒 **Secure API Proxy** - Backend server protects API keys and implements rate limiting
+- 📊 **Error Tracking** - Sentry integration for real-time error monitoring
+- 📈 **Performance Monitoring** - Web Vitals tracking and analytics
+- ✅ **Comprehensive Testing** - Unit, integration, and E2E tests with 70%+ coverage
+- 🚀 **CI/CD Pipeline** - Automated testing, building, and deployment
+- 🔐 **Security Best Practices** - CORS, rate limiting, input validation, and error handling
+- 📱 **PWA Support** - Installable app with offline capabilities
+- 🎯 **Type Safety** - Full TypeScript with strict mode and runtime validation
+
+---
+
+## 🛠️ Tech Stack
+
+### Frontend
+| Technology | Version | Purpose |
+|------------|---------|---------|
+| **React** | 19.1.1 | UI framework |
+| **TypeScript** | 5.8.2 | Type safety |
+| **Vite** | 6.2.0 | Build tool |
+| **Tailwind CSS** | Latest (CDN) | Styling |
+| **Sentry** | 8.40.0 | Error tracking |
+| **Web Vitals** | 4.2.4 | Performance monitoring |
+| **EmailJS** | 4.4.1 | Contact form |
+
+### Backend
+| Technology | Version | Purpose |
+|------------|---------|---------|
+| **Express** | 4.21.2 | API server |
+| **Google Gemini AI** | 1.16.0 | AI chat |
+| **Helmet** | 8.0.0 | Security headers |
+| **CORS** | 2.8.5 | Cross-origin requests |
+| **Express Rate Limit** | 7.5.0 | Rate limiting |
+
+### Testing & Quality
+| Tool | Purpose |
+|------|---------|
+| **Vitest** | Unit testing |
+| **Playwright** | E2E testing |
+| **Testing Library** | Component testing |
+| **ESLint** | Linting |
+| **Husky** | Git hooks |
+| **Lint-staged** | Pre-commit checks |
+
+---
+
+## 📋 Prerequisites
 
 - **Node.js** 18.x or higher
-- **npm** or **yarn** package manager
+- **npm** 9.x or higher
 - **Gemini API Key** from [Google AI Studio](https://ai.google.dev/)
+- **Git** for version control
 
-## Local Development
+### Optional (for full features)
+- **Sentry Account** for error tracking
+- **EmailJS Account** for contact form
+- **Vercel/Netlify Account** for hosting
 
-### 1. Install Dependencies
+---
+
+## 🚀 Quick Start
+
+### 1. Clone and Install
 
 ```bash
+# Clone the repository
+git clone https://github.com/yourusername/batwoman.git
+cd batwoman
+
+# Install dependencies
 npm install
 ```
 
-### 2. Configure Environment Variables
-
-Create a `.env.local` file in the root directory (use `.env.example` as a template):
+### 2. Environment Setup
 
 ```bash
+# Copy environment template
 cp .env.example .env.local
+
+# Edit .env.local with your API keys
+# Required:
+#   - GEMINI_API_KEY (for backend)
+#   - VITE_API_URL (API server URL)
+# Optional:
+#   - VITE_SENTRY_DSN
+#   - VITE_EMAILJS_* credentials
 ```
 
-Edit `.env.local` and add your Gemini API key:
+See [.env.example](.env.example) for full configuration options.
 
-```env
-GEMINI_API_KEY=your_actual_api_key_here
-```
-
-**Get your API key:** Visit [Google AI Studio](https://ai.google.dev/) to obtain a free API key.
-
-### 3. Run Development Server
+### 3. Development
 
 ```bash
+# Start frontend (port 3000)
 npm run dev
+
+# Start backend API server (port 3001)
+npm run dev:server
+
+# Open browser
+open http://localhost:3000
 ```
 
-The app will be available at `http://localhost:3000`
+---
 
-### 4. Build for Production
+## 📦 Available Scripts
 
+### Development
 ```bash
-npm run build
+npm run dev              # Start frontend dev server
+npm run dev:server       # Start backend API server with hot reload
 ```
 
-The production build will be created in the `dist/` directory.
-
-### 5. Preview Production Build
-
+### Building
 ```bash
-npm run preview
+npm run build           # Build frontend for production
+npm run build:server    # Build backend for production
+npm run preview         # Preview production build locally
 ```
 
-## Available Scripts
+### Testing
+```bash
+npm test                # Run unit tests
+npm run test:ui         # Run tests with UI
+npm run test:coverage   # Generate coverage report
+npm run test:e2e        # Run E2E tests
+npm run test:e2e:ui     # Run E2E tests with UI
+```
 
-| Command | Description |
-|---------|-------------|
-| `npm run dev` | Start development server on port 3000 |
-| `npm run build` | Create production build |
-| `npm run preview` | Preview production build locally |
-| `npm run lint` | Run ESLint to check code quality |
-| `npm run lint:fix` | Auto-fix linting issues |
+### Quality Checks
+```bash
+npm run lint            # Check code quality
+npm run lint:fix        # Fix linting issues
+npm run typecheck       # TypeScript type checking
+```
 
-## Production Deployment
+---
 
-### Deployment Platforms
-
-This app can be deployed to any static hosting platform:
-
-#### Vercel (Recommended)
-
-1. Install Vercel CLI: `npm i -g vercel`
-2. Run: `vercel`
-3. Add `GEMINI_API_KEY` to Environment Variables in Vercel dashboard
-4. Deploy: `vercel --prod`
-
-#### Netlify
-
-1. Install Netlify CLI: `npm i -g netlify-cli`
-2. Run: `netlify init`
-3. Add `GEMINI_API_KEY` to Environment Variables in Netlify dashboard
-4. Deploy: `netlify deploy --prod`
-
-#### GitHub Pages
-
-1. Update `base` in `vite.config.ts` to your repo name
-2. Run: `npm run build`
-3. Deploy `dist/` folder to `gh-pages` branch
-
-### Environment Variables for Production
-
-Make sure to set the following environment variable in your hosting platform:
-
-- `GEMINI_API_KEY` - Your Google Gemini API key
-
-## Security Considerations
-
-⚠️ **IMPORTANT: API Key Security**
-
-The current implementation embeds the Gemini API key in the client-side JavaScript bundle. This is suitable for:
-- Personal portfolios with low traffic
-- Development and testing
-- Demos and prototypes
-
-**For production with higher traffic, consider:**
-
-1. **Backend Proxy (Recommended)**
-   - Create a backend API endpoint that handles Gemini requests
-   - Keep the API key on the server side
-   - Implement rate limiting and authentication
-
-2. **API Key Restrictions**
-   - Restrict your API key by domain in Google Cloud Console
-   - Set usage quotas to prevent abuse
-   - Monitor API usage regularly
-
-3. **Contact Form**
-   - The contact form currently displays a local alert
-   - For production, integrate with:
-     - [EmailJS](https://www.emailjs.com/)
-     - [Formspree](https://formspree.io/)
-     - [SendGrid](https://sendgrid.com/)
-     - Custom backend endpoint
-
-## Project Structure
+## 🏗️ Project Structure
 
 ```
 batwoman/
-├── components/          # React components
-│   ├── About.tsx       # Professional bio section
-│   ├── Blog.tsx        # Blog listing with search
-│   ├── BlogPostPage.tsx # Individual blog post view
-│   ├── Contact.tsx     # Contact form
-│   ├── Footer.tsx      # Site footer
-│   ├── GeminiChat.tsx  # AI chat interface
-│   ├── Header.tsx      # Navigation header
-│   ├── Hero.tsx        # Landing section
-│   ├── Services.tsx    # Services showcase
-│   └── icons/          # SVG icon components
-├── data/
-│   └── blogData.ts     # Blog post content
-├── hooks/
-│   └── useOnScreen.ts  # Intersection Observer hook
-├── services/
-│   └── geminiService.ts # Gemini API integration
-├── App.tsx             # Main app component
-├── index.tsx           # React entry point
-├── index.html          # HTML template
-├── vite.config.ts      # Vite configuration
-├── tsconfig.json       # TypeScript configuration
-├── eslint.config.js    # ESLint configuration
-└── package.json        # Dependencies and scripts
+├── api/                      # Backend API server
+│   └── server.ts             # Express server with Gemini proxy
+├── components/               # React components
+│   ├── ErrorBoundary.tsx     # Global error boundary
+│   ├── GeminiChat.tsx        # AI chat interface
+│   ├── Contact.tsx           # Contact form with EmailJS
+│   └── ...                   # Other components
+├── config/                   # Configuration
+│   └── env.ts                # Environment validation (Zod)
+├── services/                 # Business logic
+│   ├── geminiService.ts      # Development Gemini client
+│   └── geminiService.production.ts  # Production API proxy client
+├── utils/                    # Utilities
+│   ├── apiClient.ts          # HTTP client with retry logic
+│   ├── logger.ts             # Structured logging
+│   ├── monitoring.ts         # Web Vitals tracking
+│   └── sentry.ts             # Sentry configuration
+├── tests/                    # Test files
+│   ├── components/           # Component tests
+│   ├── utils/                # Utility tests
+│   ├── e2e/                  # End-to-end tests
+│   └── setup.ts              # Test configuration
+├── .github/                  # GitHub Actions
+│   └── workflows/
+│       └── ci.yml            # CI/CD pipeline
+├── .husky/                   # Git hooks
+│   └── pre-commit            # Pre-commit checks
+├── vite.config.ts            # Vite + PWA configuration
+├── vitest.config.ts          # Vitest configuration
+├── playwright.config.ts      # Playwright configuration
+├── tsconfig.json             # TypeScript config (client)
+├── tsconfig.server.json      # TypeScript config (server)
+├── DEPLOYMENT.md             # Deployment guide
+└── README.md                 # This file
 ```
 
-## Code Quality
+---
 
-This project includes:
+## 🔒 Security
 
-- **TypeScript Strict Mode** - Full type safety with strict compiler options
-- **ESLint** - Configured for React, TypeScript, and React Hooks best practices
-- **Code Splitting** - Automatic chunk splitting for optimal loading
-- **Tree Shaking** - Unused code elimination in production builds
-- **Minification** - Terser minification for smaller bundle sizes
+### API Key Protection
+- ✅ **Backend Proxy**: Gemini API key is **never** exposed to the client
+- ✅ **Rate Limiting**: 100 requests per 15 minutes per IP
+- ✅ **CORS Protection**: Whitelist-based origin control
+- ✅ **Input Validation**: All user inputs are validated and sanitized
 
-## Browser Support
+### Best Practices
+- ✅ **HTTPS Only**: All production traffic uses SSL/TLS
+- ✅ **Security Headers**: Helmet.js implements security headers
+- ✅ **Error Handling**: No sensitive data in error messages
+- ✅ **Dependencies**: Regular security audits with `npm audit`
 
-- Modern browsers with ES2022 support
-- Chrome, Firefox, Safari, Edge (latest versions)
-- Mobile browsers (iOS Safari, Chrome Mobile)
+### Recommended: Google Cloud Console Settings
+1. Enable API key restrictions (HTTP referrers)
+2. Set usage quotas to prevent abuse
+3. Monitor usage in Google Cloud Console
 
-## Contributing
+---
 
-This is a personal portfolio project. For bug reports or suggestions, please create an issue.
+## 📊 Testing
 
-## License
+### Unit Tests (Vitest)
+```bash
+npm test                 # Run all tests
+npm run test:coverage    # With coverage report
+```
 
-All rights reserved. This is a private portfolio project.
+Coverage thresholds: 70% for lines, functions, branches, and statements.
 
-## Author
+### E2E Tests (Playwright)
+```bash
+npm run test:e2e         # Run E2E tests
+npm run test:e2e:ui      # Interactive mode
+```
 
-**Maha Salameh** - Chiropterologist
-Website: [darkechology.com](https://darkechology.com)
-Email: darkechology@gmail.com
+Tests cover:
+- Homepage navigation
+- Contact form submission
+- AI chat functionality
+- Mobile responsiveness
 
-## Acknowledgments
+### Pre-commit Checks
+Husky automatically runs before each commit:
+- ESLint
+- TypeScript type check
+- Related tests
 
-- Built with [React](https://react.dev/)
-- Powered by [Google Gemini AI](https://ai.google.dev/)
-- Styled with [Tailwind CSS](https://tailwindcss.com/)
-- Built with [Vite](https://vitejs.dev/)
+---
+
+## 🚀 Deployment
+
+### Quick Deploy to Vercel (Recommended)
+
+```bash
+# Install Vercel CLI
+npm install -g vercel
+
+# Deploy
+vercel --prod
+
+# Set environment variables in Vercel dashboard
+```
+
+### Comprehensive Deployment Guide
+
+See **[DEPLOYMENT.md](DEPLOYMENT.md)** for detailed instructions on:
+- ✅ Pre-deployment checklist
+- 📦 Deploying to Vercel, Netlify, or custom servers
+- 🔧 Environment configuration
+- 🏥 Health checks and monitoring
+- 🔄 Rollback procedures
+
+### Environment Variables for Production
+
+#### Frontend
+```bash
+VITE_API_URL=https://your-api-domain.com
+VITE_SENTRY_DSN=https://xxx@sentry.io/yyy
+VITE_EMAILJS_SERVICE_ID=service_xxx
+VITE_EMAILJS_TEMPLATE_ID=template_xxx
+VITE_EMAILJS_PUBLIC_KEY=xxx
+VITE_ENABLE_ANALYTICS=true
+```
+
+#### Backend
+```bash
+GEMINI_API_KEY=your_gemini_api_key
+PORT=3001
+NODE_ENV=production
+ALLOWED_ORIGINS=https://yourdomain.com
+RATE_LIMIT_MAX_REQUESTS=100
+```
+
+---
+
+## 📈 Monitoring & Analytics
+
+### Error Tracking (Sentry)
+- Real-time error reporting
+- Performance monitoring
+- Release tracking
+- User feedback integration
+
+### Performance (Web Vitals)
+- Core Web Vitals tracking
+- Custom performance metrics
+- Automatic reporting to Sentry
+
+### Logging
+- Structured logging with log levels
+- API request/response logging
+- User action tracking
+- Performance metrics
+
+---
+
+## 🧪 Code Quality
+
+### ESLint Configuration
+- TypeScript ESLint recommended rules
+- React and React Hooks plugins
+- Custom rules for code consistency
+- No unused variables, explicit `any`, etc.
+
+### TypeScript
+- Strict mode enabled
+- No implicit any
+- Strict null checks
+- Comprehensive type coverage
+
+### Git Hooks
+- **Pre-commit**: Lint, type check, and test related files
+- **Pre-push**: Full test suite (optional)
+
+---
+
+## 🎨 Customization
+
+### Styling
+- Edit Tailwind classes in components
+- Modify color scheme in component files
+- Update theme in `vite.config.ts` PWA manifest
+
+### Content
+- Blog posts: `data/blogData.ts`
+- Services: `components/Services.tsx`
+- About section: `components/About.tsx`
+
+### AI Behavior
+- System instruction: `services/geminiService.production.ts`
+- Model selection: Change `gemini-2.5-flash` to other models
+
+---
+
+## 🐛 Troubleshooting
+
+### Common Issues
+
+**"API key not configured"**
+- Ensure `GEMINI_API_KEY` is set in backend `.env`
+- Restart backend server after changing environment variables
+
+**CORS errors**
+- Add your frontend URL to `ALLOWED_ORIGINS` in backend `.env`
+- Restart backend server
+
+**Tests failing**
+- Run `npm install` to ensure all dependencies are installed
+- Check that `tests/setup.ts` is configured correctly
+
+**Build errors**
+- Run `npm run typecheck` to find type errors
+- Ensure all environment variables are set
+
+See **[DEPLOYMENT.md](DEPLOYMENT.md#troubleshooting)** for more solutions.
+
+---
+
+## 🤝 Contributing
+
+Contributions are welcome! Please follow these steps:
+
+1. Fork the repository
+2. Create a feature branch (`git checkout -b feature/amazing-feature`)
+3. Make your changes
+4. Run tests (`npm test && npm run test:e2e`)
+5. Commit with conventional commits (`git commit -m 'feat: add amazing feature'`)
+6. Push to the branch (`git push origin feature/amazing-feature`)
+7. Open a Pull Request
+
+### Commit Convention
+- `feat:` New feature
+- `fix:` Bug fix
+- `docs:` Documentation changes
+- `test:` Test changes
+- `refactor:` Code refactoring
+- `chore:` Maintenance tasks
+
+---
+
+## 📄 License
+
+This project is licensed under the **MIT License** - see the [LICENSE](LICENSE) file for details.
+
+---
+
+## 👤 Author
+
+**Maha Salameh**
+- Email: darkechology@gmail.com
+- Website: [darkechology.com](https://darkechology.com)
+- LinkedIn: [@darkechology](https://linkedin.com/in/darkechology)
+
+---
+
+## 🙏 Acknowledgments
+
+- **Google Gemini AI** for powering the chat functionality
+- **React Team** for the amazing framework
+- **Vite Team** for the blazing-fast build tool
+- **Open Source Community** for all the incredible tools
+
+---
+
+## 📞 Support
+
+- 📧 Email: darkechology@gmail.com
+- 🐛 Issues: [GitHub Issues](https://github.com/yourusername/batwoman/issues)
+- 💬 Discussions: [GitHub Discussions](https://github.com/yourusername/batwoman/discussions)
+
+---
+
+<div align="center">
+
+**Made with ❤️ by Maha Salameh**
+
+Star ⭐ this repository if you find it helpful!
+
+</div>
