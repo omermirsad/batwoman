@@ -38,7 +38,7 @@ export async function* streamChatResponse(messages: Message[]): AsyncGenerator<s
   });
 
   try {
-    const response = await fetch(`${import.meta.env.VITE_API_URL}/api/chat/stream`, {
+    const response = await globalThis.fetch(`${import.meta.env.VITE_API_URL}/api/chat/stream`, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
@@ -59,7 +59,7 @@ export async function* streamChatResponse(messages: Message[]): AsyncGenerator<s
     }
 
     const reader = response.body.getReader();
-    const decoder = new TextDecoder();
+    const decoder = new globalThis.TextDecoder();
 
     while (true) {
       const { done, value } = await reader.read();

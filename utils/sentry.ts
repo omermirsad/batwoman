@@ -46,7 +46,7 @@ export function initSentry(): void {
       ],
 
       // Before send hook - filter sensitive data
-      beforeSend(event, hint) {
+      beforeSend(event) {
         // Filter out events in development
         if (import.meta.env.MODE === 'development') {
           console.log('Sentry event (dev only):', event);

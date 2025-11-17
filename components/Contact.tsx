@@ -73,7 +73,9 @@ const Contact: React.FC = () => {
       } else {
         // Fallback: Log to console and show success message
         logger.warn('EmailJS not configured, using fallback');
+        // eslint-disable-next-line no-console
         console.log('Contact form submission (EmailJS not configured):', formData);
+        // eslint-disable-next-line no-console
 
         setSubmitStatus({
           type: 'success',

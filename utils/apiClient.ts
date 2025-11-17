@@ -51,7 +51,7 @@ function isRetryableError(error: AxiosError): boolean {
  * Sleep utility for retry delays
  */
 function sleep(ms: number): Promise<void> {
-  return new Promise(resolve => setTimeout(resolve, ms));
+  return new Promise(resolve => globalThis.setTimeout(resolve, ms));
 }
 
 /**
@@ -95,14 +95,14 @@ export function createApiClient(baseURL?: string, retryConfig?: Partial<RetryCon
   // Response interceptor - log and handle errors
   client.interceptors.response.use(
     (response: AxiosResponse) => {
-      const config = response.config as any;
-      const duration = config.metadata?.startTime
-        ? Date.now() - config.metadata.startTime
+      const requestConfig = response.config as any;
+      const duration = requestConfig.metadata?.startTime
+        ? Date.now() - requestConfig.metadata.startTime
         : 0;
 
       logger.apiResponse(
-        config.method?.toUpperCase() || 'UNKNOWN',
-        config.url || '',
+        requestConfig.method?.toUpperCase() || 'UNKNOWN',
+        requestConfig.url || '',
         response.status,
         duration
       );
