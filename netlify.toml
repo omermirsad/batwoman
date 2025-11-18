@@ -22,14 +22,12 @@
   # External node modules to include
   external_node_modules = ["@google/genai"]
 
-# SPA routing - redirect non-API requests to index.html
-# API routes are handled by Netlify Functions automatically
+# SPA routing - redirect all requests to index.html
+# Netlify Functions (at /api/* and /health) are automatically handled and take precedence
 [[redirects]]
   from = "/*"
   to = "/index.html"
   status = 200
-  # Don't apply this redirect to API routes or function paths
-  conditions = {path = "!=/api/*", path = "!=/health"}
 
 # Security headers
 [[headers]]
