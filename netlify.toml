@@ -1,80 +1,14 @@
-# Netlify Configuration
-# https://docs.netlify.com/configure-builds/file-based-configuration/
-
 [build]
-  # Build command
-  command = "npm run build"
-
-  # Publish directory
+  command = "npm run build:all"
   publish = "dist"
+  functions = "netlify/functions-build"
 
-  # Functions directory
-  functions = "netlify/functions"
-
-  # Node version
-  [build.environment]
-    NODE_VERSION = "20"
-
-# Netlify Functions Configuration
 [functions]
-  # TypeScript support
   node_bundler = "esbuild"
-  # External node modules to include
   external_node_modules = ["@google/genai"]
 
-# SPA routing - redirect all requests to index.html
-# Netlify Functions (at /api/* and /health) are automatically handled and take precedence
 [[redirects]]
   from = "/*"
   to = "/index.html"
   status = 200
-
-# Security headers
-[[headers]]
-  for = "/*"
-    [headers.values]
-    # Prevent clickjacking
-    X-Frame-Options = "DENY"
-
-    # Prevent MIME sniffing
-    X-Content-Type-Options = "nosniff"
-
-    # Enable XSS protection
-    X-XSS-Protection = "1; mode=block"
-
-    # Referrer policy
-    Referrer-Policy = "strict-origin-when-cross-origin"
-
-    # Permissions policy
-    Permissions-Policy = "camera=(), microphone=(), geolocation=()"
-
-    # Content Security Policy (adjusted for Netlify Functions)
-    Content-Security-Policy = "default-src 'self'; script-src 'self' 'unsafe-inline' 'unsafe-eval' https://cdn.jsdelivr.net https://unpkg.com; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com; img-src 'self' data: https:; connect-src 'self' https://*.netlify.app https://*.ingest.sentry.io https://api.emailjs.com https://generativelanguage.googleapis.com; frame-ancestors 'none';"
-
-# Cache static assets
-[[headers]]
-  for = "/assets/*"
-    [headers.values]
-    Cache-Control = "public, max-age=31536000, immutable"
-
-[[headers]]
-  for = "/*.js"
-    [headers.values]
-    Cache-Control = "public, max-age=31536000, immutable"
-
-[[headers]]
-  for = "/*.css"
-    [headers.values]
-    Cache-Control = "public, max-age=31536000, immutable"
-
-# Service Worker
-[[headers]]
-  for = "/sw.js"
-    [headers.values]
-    Cache-Control = "public, max-age=0, must-revalidate"
-
-# Manifest
-[[headers]]
-  for = "/manifest.webmanifest"
-    [headers.values]
-    Cache-Control = "public, max-age=86400"
+  conditions = {path = "!=/api/*", path = "!=/health"}

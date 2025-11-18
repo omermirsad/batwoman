@@ -13,7 +13,7 @@ interface ChatRequest {
 export default async (req: Request) => {
   // CORS headers
   const headers = {
-    'Access-Control-Allow-Origin': '*', // Will be configured via environment
+    'Access-Control-Allow-Origin': '*',
     'Access-Control-Allow-Headers': 'Content-Type',
     'Access-Control-Allow-Methods': 'POST, OPTIONS',
     'Content-Type': 'application/json',
