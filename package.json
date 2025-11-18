@@ -8,7 +8,6 @@
     "dev:server": "tsx watch api/server.ts",
     "build": "tsc && vite build",
     "build:server": "tsc -p tsconfig.server.json",
-    "build:functions": "tsc -p tsconfig.functions.json",
     "preview": "vite preview",
     "lint": "eslint . --ext .ts,.tsx",
     "lint:fix": "eslint . --ext .ts,.tsx --fix",
@@ -18,8 +17,7 @@
     "test:e2e": "playwright test",
     "test:e2e:ui": "playwright test --ui",
     "typecheck": "tsc --noEmit",
-    "prepare": "husky",
-    "build:all": "npm run build:functions && npm run build"
+    "prepare": "husky"
   },
   "dependencies": {
     "@google/genai": "^1.16.0",
@@ -35,7 +33,6 @@
   "devDependencies": {
     "@emailjs/browser": "^4.4.1",
     "@eslint/js": "^9.39.1",
-    "@netlify/functions": "^2.8.2",
     "@playwright/test": "^1.49.1",
     "@testing-library/jest-dom": "^6.6.3",
     "@testing-library/react": "^16.1.0",
