@@ -24,6 +24,7 @@ export default defineConfig({
         'dist/',
         'dist-server/',
         'api/',
+        'netlify/', // Exclude Netlify functions from coverage
         'components/', // Exclude components from coverage for now
         'data/', // Exclude static data
         'config/', // Exclude config
