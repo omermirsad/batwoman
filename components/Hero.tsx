@@ -1,21 +1,38 @@
-import React, { useState } from 'react';
+import React, { useState, useRef, useEffect } from 'react';
 import { SoundWaveIcon } from './icons/SoundWaveIcon';
 
 const Hero: React.FC = () => {
   const [isPopupOpen, setIsPopupOpen] = useState(false);
+  const videoRef = useRef<HTMLVideoElement>(null);
+
+  useEffect(() => {
+    // Ensure video plays properly
+    if (videoRef.current) {
+      videoRef.current.play().catch(error => {
+        console.log('Video autoplay failed:', error);
+      });
+    }
+  }, []);
 
   return (
     <section className="relative min-h-screen flex items-center justify-center text-center text-white overflow-hidden">
       <div className="absolute inset-0 z-0">
         <video
+          ref={videoRef}
           autoPlay
           loop
           muted
           playsInline
           className="h-full w-full object-cover"
-          poster="/images/hero-poster.jpg"
+          poster="https://images.pexels.com/photos/2559941/pexels-photo-2559941.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1"
         >
           <source src="https://videos.pexels.com/video-files/7181665/7181665-uhd_2560_1440_25fps.mp4" type="video/mp4" />
+          {/* Fallback image if video doesn't load */}
+          <img 
+            src="https://images.pexels.com/photos/2559941/pexels-photo-2559941.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1" 
+            alt="Bat flying at dusk" 
+            className="h-full w-full object-cover"
+          />
         </video>
         <div className="absolute inset-0 bg-black/60"></div>
         <div className="absolute inset-0 bg-gradient-to-t from-[#111121] via-[#111121]/70 to-transparent"></div>
