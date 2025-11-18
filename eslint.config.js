@@ -33,7 +33,16 @@ export default [
         HTMLTextAreaElement: 'readonly',
         HTMLFormElement: 'readonly',
         SVGSVGElement: 'readonly',
-        IntersectionObserver: 'readonly'
+        IntersectionObserver: 'readonly',
+        // Web API globals for Netlify Functions
+        Request: 'readonly',
+        Response: 'readonly',
+        ReadableStream: 'readonly',
+        TextEncoder: 'readonly',
+        TextDecoder: 'readonly',
+        Headers: 'readonly',
+        URL: 'readonly',
+        URLSearchParams: 'readonly'
       }
     },
     plugins: {
