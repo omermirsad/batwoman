@@ -33,6 +33,7 @@
   "devDependencies": {
     "@emailjs/browser": "^4.4.1",
     "@eslint/js": "^9.39.1",
+    "@netlify/functions": "^2.8.2",
     "@playwright/test": "^1.49.1",
     "@testing-library/jest-dom": "^6.6.3",
     "@testing-library/react": "^16.1.0",

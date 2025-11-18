@@ -60,8 +60,12 @@ function sleep(ms: number): Promise<void> {
 export function createApiClient(baseURL?: string, retryConfig?: Partial<RetryConfig>): AxiosInstance {
   const retryConf = { ...DEFAULT_RETRY_CONFIG, ...retryConfig };
 
+  // Use relative URL if VITE_API_URL is not set (for Netlify Functions)
+  // Otherwise use provided baseURL or VITE_API_URL or fallback to localhost
+  const apiBaseURL = baseURL || import.meta.env.VITE_API_URL || (typeof window !== 'undefined' ? '' : 'http://localhost:3001');
+
   const client = axios.create({
-    baseURL: baseURL || import.meta.env.VITE_API_URL || 'http://localhost:3001',
+    baseURL: apiBaseURL,
     timeout: 30000, // 30 seconds
     headers: {
       'Content-Type': 'application/json',

@@ -38,7 +38,11 @@ export async function* streamChatResponse(messages: Message[]): AsyncGenerator<s
   });
 
   try {
-    const response = await globalThis.fetch(`${import.meta.env.VITE_API_URL}/api/chat/stream`, {
+    // Use relative URL if VITE_API_URL is not set (for Netlify Functions)
+    const apiUrl = import.meta.env.VITE_API_URL || '';
+    const endpoint = apiUrl ? `${apiUrl}/api/chat/stream` : '/api/chat/stream';
+
+    const response = await globalThis.fetch(endpoint, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
