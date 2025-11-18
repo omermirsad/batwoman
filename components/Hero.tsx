@@ -15,7 +15,7 @@ const Hero: React.FC = () => {
           className="h-full w-full object-cover"
           poster="https://images.pexels.com/photos/2559941/pexels-photo-2559941.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1"
         >
-          <source src="https://player.vimeo.com/progressive_redirect/playback/7181665/rendition/1080p/file.mp4?loc=external&signature=abc123" type="video/mp4" />
+          <source src="https://www.pexels.com/download/video/7181665/" type="video/mp4" />
           {/* Fallback image if video doesn't load */}
           <img 
             src="https://images.pexels.com/photos/2559941/pexels-photo-2559941.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1" 
