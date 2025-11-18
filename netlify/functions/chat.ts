@@ -44,7 +44,7 @@ export default async (req: Request) => {
     }
 
     // Parse request body
-    const body: ChatRequest = await req.json();
+    const body = await req.json() as ChatRequest;
     const { messages, systemInstruction } = body;
 
     // Validation
