@@ -8,15 +8,28 @@
   # Publish directory
   publish = "dist"
 
+  # Functions directory
+  functions = "netlify/functions"
+
   # Node version
   [build.environment]
     NODE_VERSION = "20"
 
-# SPA routing - redirect all requests to index.html
+# Netlify Functions Configuration
+[functions]
+  # TypeScript support
+  node_bundler = "esbuild"
+  # External node modules to include
+  external_node_modules = ["@google/genai"]
+
+# SPA routing - redirect non-API requests to index.html
+# API routes are handled by Netlify Functions automatically
 [[redirects]]
   from = "/*"
   to = "/index.html"
   status = 200
+  # Don't apply this redirect to API routes or function paths
+  conditions = {path = "!=/api/*", path = "!=/health"}
 
 # Security headers
 [[headers]]
@@ -37,8 +50,8 @@
     # Permissions policy
     Permissions-Policy = "camera=(), microphone=(), geolocation=()"
 
-    # Content Security Policy (adjust as needed)
-    Content-Security-Policy = "default-src 'self'; script-src 'self' 'unsafe-inline' 'unsafe-eval' https://cdn.jsdelivr.net https://unpkg.com; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com; img-src 'self' data: https:; connect-src 'self' https://*.ingest.sentry.io https://api.emailjs.com; frame-ancestors 'none';"
+    # Content Security Policy (adjusted for Netlify Functions)
+    Content-Security-Policy = "default-src 'self'; script-src 'self' 'unsafe-inline' 'unsafe-eval' https://cdn.jsdelivr.net https://unpkg.com; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com; img-src 'self' data: https:; connect-src 'self' https://*.netlify.app https://*.ingest.sentry.io https://api.emailjs.com https://generativelanguage.googleapis.com; frame-ancestors 'none';"
 
 # Cache static assets
 [[headers]]
